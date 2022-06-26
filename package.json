@@ -1,5 +1,5 @@
 {
-  "name": "2359-expo-dls",
+  "name": "2359-expo-core",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "@types/react-native": "*",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
+    "eslint": "*",
     "eslint-config-prettier": "*",
     "eslint-plugin-prettier": "*",
     "husky": "4",
@@ -52,12 +53,13 @@
       "plugin:@typescript-eslint/eslint-recommended"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc --noEmit && lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   },
   "private": true
 }

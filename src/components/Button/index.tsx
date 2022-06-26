@@ -150,7 +150,7 @@ export const styles = createStyles(() => ({
     color: colors.white,
   },
   textPrimaryDisabled: {
-    color: colors.gray51,
+    color: colors.disabledDarker,
   },
   textSecondary: {
     color: colors.primary,
