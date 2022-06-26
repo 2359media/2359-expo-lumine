@@ -1,10 +1,12 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {Text, ImageBackground, Animated} from 'react-native';
-import {absoluteFillObject, colors, createStyles} from '../style';
+import {absoluteFillObject, createThemeStyles} from '../style';
+import {versionString} from './version';
 
 export default function AppSplash({text, done}: any) {
   const opacityA = useMemo(() => new Animated.Value(1), []);
   const [hidden, setHidden] = useState(false);
+  const styles = useThemeStyles();
 
   useEffect(() => {
     if (done) {
@@ -31,7 +33,7 @@ export default function AppSplash({text, done}: any) {
         resizeMode="cover"
       >
         <Text style={styles.text}>
-          {/* {versionString} */}
+          {versionString}
           {'\n'}
           {text}
         </Text>
@@ -40,7 +42,7 @@ export default function AppSplash({text, done}: any) {
   );
 }
 
-const styles = createStyles(() => ({
+const useThemeStyles = createThemeStyles(({colors}) => ({
   container: {
     flex: 1,
   },
@@ -51,7 +53,7 @@ const styles = createStyles(() => ({
   }),
   image: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },

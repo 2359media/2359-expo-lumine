@@ -1,15 +1,17 @@
 import React from 'react';
 import {Text, TextProps} from 'react-native';
-import {colors, createStyles, fonts} from '../../services/style';
+import {createThemeStyles} from '../../services/style';
 
 function createTypography(name: string) {
-  const style = (textStyles as any)[name.toLowerCase()];
+  const key = name.toLowerCase();
   return function Typography(props: TextProps) {
+    const styles = useThemeStyles();
+    const style = (styles as any)[key];
     return <Text {...props} style={[style, props.style]} />;
   };
 }
 
-export const textStyles = createStyles(() => ({
+const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
   h1: {
     fontFamily: fonts.primary400,
     color: colors.foreground,

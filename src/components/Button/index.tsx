@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, Image, Pressable, ViewProps} from 'react-native';
-import {colors, createStyles, fonts} from '../../services/style';
+import {createThemeStyles} from '../../services/style';
 
 const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
 
@@ -41,6 +41,8 @@ export function Button<T>(props: Props<T>) {
     onPress,
     ...rest
   } = props;
+
+  const styles = useThemeStyles();
 
   const type = (secondary && 'Secondary') || (link && 'Link') || 'Primary';
 
@@ -87,7 +89,7 @@ export function Button<T>(props: Props<T>) {
   );
 }
 
-export const styles = createStyles(() => ({
+const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -100,7 +102,7 @@ export const styles = createStyles(() => ({
     backgroundColor: colors.primary,
   },
   containerPrimaryPressed: {
-    backgroundColor: colors.primaryDarker,
+    backgroundColor: colors.primaryD1,
   },
   containerPrimaryDisabled: {
     backgroundColor: colors.disabled,
@@ -115,7 +117,7 @@ export const styles = createStyles(() => ({
     borderColor: colors.primary,
   },
   containerSecondaryPressed: {
-    borderColor: colors.primaryDarker,
+    borderColor: colors.primaryD1,
   },
   containerSecondaryDisabled: {
     borderColor: colors.disabled,
@@ -130,16 +132,16 @@ export const styles = createStyles(() => ({
     tintColor: colors.white,
   },
   iconPrimaryDisabled: {
-    tintColor: colors.disabledDarker,
+    tintColor: colors.disabledD1,
   },
   iconSecondary: {
     tintColor: colors.primary,
   },
   iconSecondaryPressed: {
-    tintColor: colors.primaryDarker,
+    tintColor: colors.primaryD1,
   },
   iconSecondaryDisabled: {
-    tintColor: colors.disabledDarker,
+    tintColor: colors.disabledD1,
   },
   text: {
     margin: 6,
@@ -150,25 +152,25 @@ export const styles = createStyles(() => ({
     color: colors.white,
   },
   textPrimaryDisabled: {
-    color: colors.disabledDarker,
+    color: colors.disabledD1,
   },
   textSecondary: {
     color: colors.primary,
   },
   textSecondaryPressed: {
-    color: colors.primaryDarker,
+    color: colors.primaryD1,
   },
   textSecondaryDisabled: {
-    color: colors.disabledDarker,
+    color: colors.disabledD1,
   },
   textLink: {
     color: colors.primary,
   },
   textLinkPressed: {
-    color: colors.primaryDarker,
+    color: colors.primaryD1,
   },
   textLinkDisabled: {
-    color: colors.disabledDarker,
+    color: colors.disabledD1,
   },
   textLinkSmall: {
     color: colors.primary,

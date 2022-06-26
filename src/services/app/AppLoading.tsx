@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
 import {View} from 'react-native';
-// import * as SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from 'expo-splash-screen';
 import AppSplash from './AppSplash';
 import {createStyles} from '../style';
 
@@ -14,9 +14,9 @@ export function AppLoading({asyncs, children}: Props) {
   const [text, setText] = useState('');
 
   useLayoutEffect(() => {
-    // SplashScreen.preventAutoHideAsync()
-    //   .then(() => setTimeout(() => SplashScreen.hideAsync(), 200))
-    //   .catch(() => {});
+    SplashScreen.preventAutoHideAsync()
+      .then(() => setTimeout(() => SplashScreen.hideAsync(), 200))
+      .catch(() => {});
     Promise.all(asyncs.map(a => a(setText).catch(() => {}))).finally(() =>
       setDone(true)
     );

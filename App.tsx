@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button} from './src/components/Button';
 import {
@@ -13,17 +13,35 @@ import {
   H4,
   H5,
 } from './src/components/Typography';
-import {AppLoading} from './src/services/apploading';
-import {loadFonts} from './src/services/style';
+import {AppProvider} from './src/services/app';
+import {colors, createStyles, defaultTheme, Theme} from './src/services/style';
+
+const darkTheme: Theme = {
+  key: 'dark',
+  fonts: defaultTheme.fonts,
+  colors: {
+    ...defaultTheme.colors,
+    primary: 'green',
+    background: 'black',
+    foreground: 'gray',
+  },
+};
 
 export default function App() {
+  const [theme, setTheme] = useState(darkTheme);
   return (
-    <AppLoading asyncs={[loadFonts]}>
+    <AppProvider theme={theme}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
-        <Button style={styles.button} text="Primary" />
+        <Button
+          style={styles.button}
+          text="Primary"
+          onPress={() => {
+            setTheme(theme == darkTheme ? defaultTheme : darkTheme);
+          }}
+        />
         <Button style={styles.button} text="Rounded" rounded />
         <Button style={styles.button} text="Disabled" disabled />
         <Button style={styles.button} text="Secondary" secondary />
@@ -42,17 +60,18 @@ export default function App() {
         <Body4>Body 4</Body4>
         <FootNote>Footnote</FootNote>
       </ScrollView>
-    </AppLoading>
+    </AppProvider>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = createStyles({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background,
   },
   contentContainer: {
     padding: 24,
+    paddingTop: 56,
   },
   button: {
     marginBottom: 24,
