@@ -16,9 +16,16 @@ import {
 import {AppProvider} from './src/services/app';
 import {colors, createStyles} from './src/services/style';
 
+async function waitFor5Seconds(ut: (t: string) => void) {
+  await new Promise(r => {
+    ut('Wait for 5 seconds');
+    setTimeout(r, 5000);
+  });
+}
+
 export default function App() {
   return (
-    <AppProvider>
+    <AppProvider asyncs={[waitFor5Seconds]}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}

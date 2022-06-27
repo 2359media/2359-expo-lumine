@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Text, ImageBackground, Animated} from 'react-native';
+import {Text, ImageBackground, Animated, View} from 'react-native';
 import {absoluteFillObject, createThemeStyles} from '../style';
 import {versionString} from './version';
 
@@ -29,14 +29,16 @@ export default function AppSplash({text, done}: any) {
     <Animated.View style={styles.splash(opacityA)}>
       <ImageBackground
         style={styles.image}
-        source={require('../../../assets/splash.png')}
+        source={require('../../bridge').splashImage}
         resizeMode="cover"
       >
-        <Text style={styles.text}>
-          {versionString}
-          {'\n'}
-          {text}
-        </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>
+            {versionString}
+            {'\n'}
+            {text}
+          </Text>
+        </View>
       </ImageBackground>
     </Animated.View>
   );
@@ -57,13 +59,18 @@ const useThemeStyles = createThemeStyles(({colors}) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
+  textContainer: {
+    backgroundColor: 'black',
+    padding: 8,
+    borderRadius: 8,
+    alignSelf: 'center',
+    marginBottom: 50,
+    // opacity: 0.5,
+  },
   text: {
     textAlign: 'center',
-    alignSelf: 'stretch',
-    marginBottom: 50,
     fontSize: 14,
     fontWeight: 'bold',
     color: 'white',
-    opacity: 0.8,
   },
 }));

@@ -43,6 +43,11 @@
   "files": [
     "build"
   ],
+  "nodemonConfig": {
+    "ignore": [
+      "build/*"
+    ]
+  },
   "prettier": {
     "bracketSpacing": false,
     "arrowParens": "avoid",
