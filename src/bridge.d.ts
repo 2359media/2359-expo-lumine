@@ -1,6 +1,7 @@
 export declare const splashImage: any;
-
-import {State} from '../../../src/lumineconfig/state';
-export {State};
-
+export interface State {
+  setting: {
+    language?: string;
+  };
+}
 export declare const initialState: State;
