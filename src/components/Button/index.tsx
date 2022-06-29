@@ -4,7 +4,7 @@ import {createThemeStyles} from '../../services/style';
 
 const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
 
-interface Props<T> extends ViewProps {
+export interface ButtonProps<T> extends ViewProps {
   text?: string;
   icon?: any;
   value?: T;
@@ -24,7 +24,7 @@ interface Props<T> extends ViewProps {
   onPress?(value?: T): void;
 }
 
-export function Button<T>(props: Props<T>) {
+export function Button<T>(props: ButtonProps<T>) {
   const {
     text,
     icon,

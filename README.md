@@ -4,7 +4,7 @@ Provides components & services to speed up react native projects.
 
 # API documentation
 
-- [Button](./docs/Button.md)
+- [Button](./src/components/Button/index.md)
 
 # Installation
 

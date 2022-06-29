@@ -1,6 +1,5 @@
-import { State } from './state';
 export declare const actionTypes: {
     update: string;
     reset: string;
 };
-export default function (state: State | undefined, action: any): State;
+export declare function createReducer<T extends Object>(initialState: T): (state: T | undefined, action: any) => T;

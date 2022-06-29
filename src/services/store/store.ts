@@ -1,43 +1,50 @@
 import {useState, useEffect} from 'react';
-import {createStore, DeepPartial} from 'redux';
+import {createStore as createReduxStore, DeepPartial} from 'redux';
 import {persistStore} from 'redux-persist';
-import {State, initialState} from './state';
-import reducer, {actionTypes} from './reducer';
+import {actionTypes, createReducer} from './reducer';
 import {loadEnv} from '../env';
 
-const devTools: any = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
-const store = createStore(reducer, devTools && devTools());
-
-let persistor: any;
-
-export const getState = store.getState;
-
-export const subscribe = store.subscribe;
-
-export function updateState(newState: DeepPartial<State>) {
-  store.dispatch({type: actionTypes.update, payload: newState});
+interface StoreProps<T> {
+  initialState: T;
 }
 
-export function resetStateExcept(keys: (keyof State)[]) {
-  const resetState: any = {...initialState};
-  keys.forEach(k => delete resetState[k]);
-  store.dispatch({type: actionTypes.reset, payload: resetState});
-}
+export function createStore<T extends Object>(props: StoreProps<T>) {
+  const devTools: any = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
 
-export function useSelector<T>(fn: (s: State) => T): T {
-  const [state, setState] = useState(() => fn(store.getState()));
-  useEffect(() => {
-    return store.subscribe(() => {
-      const newState = fn(store.getState());
-      newState != state && setState(newState);
-    });
-  }, [state]);
-  return state;
-}
+  let persistor: any;
 
-export function loadStore() {
-  return loadEnv().then(() => {
-    return new Promise(resolve => {
+  const store = createReduxStore(
+    createReducer(props.initialState),
+    devTools && devTools()
+  );
+
+  const getState = store.getState;
+  const subscribe = store.subscribe;
+
+  function updateState(newState: DeepPartial<T>) {
+    store.dispatch({type: actionTypes.update, payload: newState});
+  }
+
+  function resetStateExcept(keys: (keyof T)[]) {
+    const resetState: any = {...props.initialState};
+    keys.forEach(k => delete resetState[k]);
+    store.dispatch({type: actionTypes.reset, payload: resetState});
+  }
+
+  function useSelector<S>(fn: (s: T) => S): S {
+    const [state, setState] = useState(() => fn(store.getState()));
+    useEffect(() => {
+      return store.subscribe(() => {
+        const newState = fn(store.getState());
+        newState != state && setState(newState);
+      });
+    }, [state]);
+    return state;
+  }
+
+  async function loadStore() {
+    await loadEnv();
+    await new Promise(resolve => {
       persistor = persistStore(store);
       let unsubscribe = () => {};
       function handlePersistorState() {
@@ -49,5 +56,14 @@ export function loadStore() {
       handlePersistorState();
       unsubscribe = persistor.subscribe(handlePersistorState);
     });
-  });
+  }
+
+  return {
+    getState,
+    subscribe,
+    updateState,
+    resetStateExcept,
+    useSelector,
+    loadStore,
+  };
 }

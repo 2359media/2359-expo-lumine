@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {Button} from './src/components/Button';
 import {
+  Button,
   Body1,
   Body2,
   Body3,
@@ -12,9 +12,10 @@ import {
   H3,
   H4,
   H5,
-} from './src/components/Typography';
-import {AppProvider} from './src/services/app';
-import {colors, createStyles} from './src/services/style';
+  AppProvider,
+  colors,
+  createStyles,
+} from './src';
 
 async function waitFor5Seconds(ut: (t: string) => void) {
   await new Promise(r => {
