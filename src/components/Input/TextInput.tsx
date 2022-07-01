@@ -1,15 +1,25 @@
-import React, {useRef} from 'react';
-import {TextInput as RNTI, TextInputProps as RNTIP} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  Pressable,
+  TextInput as RNTI,
+  TextInputProps as RNTIP,
+  Image,
+} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 import {InputContainer, InputProps} from './InputContainer';
-import {useThemeStyles} from './styles';
+
+const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
 
 export interface TextInputProps extends InputProps<string>, RNTIP {}
 
 export function TextInput(props: TextInputProps) {
   const tiRef = useRef<RNTI>(null);
-  const styles = useThemeStyles();
   const focus = useSharedValue(false);
+  const [secure, setSecure] = useState(props.secureTextEntry);
+
+  useEffect(() => {
+    setSecure(props.secureTextEntry);
+  }, [props.secureTextEntry]);
 
   function onPress() {
     tiRef.current?.focus();
@@ -26,17 +36,25 @@ export function TextInput(props: TextInputProps) {
       {...props}
       onPress={onPress}
       focus={focus}
-      placeholder={props.placeholder ? ' ' : undefined}
+      icon={
+        props.secureTextEntry && (
+          <Pressable hitSlop={hitSlop} onPress={() => setSecure(!secure)}>
+            <Image source={require('../../services/res/icons/eyeOn.png')} />
+          </Pressable>
+        )
+      }
     >
-      <RNTI
-        ref={tiRef}
-        {...props}
-        style={props.rounded ? styles.valueRounded : styles.value}
-        placeholderTextColor={styles.placeholder.color}
-        onChangeText={props.onValueChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
+      {styleProps => (
+        <RNTI
+          ref={tiRef}
+          {...props}
+          {...styleProps}
+          onChangeText={props.onValueChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          secureTextEntry={secure}
+        />
+      )}
     </InputContainer>
   );
 }

@@ -12,6 +12,8 @@ export const colors = {
   /** #AAAAAA */ disabledD1: '#AAAAAA',
   /** #000000 */ black: '#000000',
   /** #FFFFFF */ white: '#FFFFFF',
+  /** #C2C9D1 */ greyL3: '#C2C9D1',
+  /** #AAAAAA */ greyL2: '#AAAAAA',
   /** #757575 */ greyL1: '#757575',
   /** #4D4D4D */ grey: '#4D4D4D',
   /** #2D2D2D */ greyD1: '#2D2D2D',

@@ -52,10 +52,10 @@ export function Button<T>(props: ButtonProps<T>) {
       anyStyles[name],
       anyStyles[name + type],
       rounded && anyStyles[name + type + 'Rounded'],
-      disabled && anyStyles[name + type + 'Disabled'],
       small && anyStyles[name + type + 'Small'],
       large && anyStyles[name + type + 'Large'],
       pressed && anyStyles[name + type + 'Pressed'],
+      disabled && anyStyles[name + type + 'Disabled'],
       s,
       pressed && ps,
     ].filter(s => s);
@@ -78,7 +78,10 @@ export function Button<T>(props: ButtonProps<T>) {
             />
           )}
           {!!text && (
-            <Text style={getStyle('text', pressed, sx?.text, sx?.textPressed)}>
+            <Text
+              style={getStyle('text', pressed, sx?.text, sx?.textPressed)}
+              numberOfLines={1}
+            >
               {text}
             </Text>
           )}

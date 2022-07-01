@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {View, Text, Pressable, ViewProps} from 'react-native';
+import {TextInput as RNTI, TextInputProps as RNTIP} from 'react-native';
 import Animated, {
+  useSharedValue,
   SharedValue,
   useAnimatedStyle,
   withTiming,
@@ -19,9 +21,10 @@ export interface InputProps<T> {
 }
 
 export interface InputContainerProps<T> extends InputProps<T>, ViewProps {
-  children?: any;
+  children?(props: any): any;
   onPress?(): void;
   focus?: SharedValue<boolean>;
+  inputType?: 'text' | 'textInput';
 }
 
 export function InputContainer<T>(props: InputContainerProps<T>) {
@@ -34,40 +37,64 @@ export function InputContainer<T>(props: InputContainerProps<T>) {
     children,
     rounded,
     error,
+    editable = true,
+    icon,
     style,
   } = props;
 
   const styles = useThemeStyles();
+  const type = (rounded && 'Rounded') || 'Line';
 
   const titleStyle = useAnimatedStyle(() => {
-    const shouldMove = focus?.value || placeholder || value;
-    return {
-      fontSize: withTiming(shouldMove ? 12 : 16, {duration: 200}),
-      top: withTiming(shouldMove ? 0 : 12, {duration: 200}),
-    };
-  });
+    const onTop = focus?.value || placeholder || value;
+    if (type == 'Rounded') {
+      return {
+        fontSize: withTiming(onTop ? 12 : 14, {duration: 200}),
+        top: withTiming(onTop ? 2 : 14, {duration: 200}),
+      };
+    } else {
+      return {
+        fontSize: withTiming(onTop ? 12 : 16, {duration: 200}),
+        top: withTiming(onTop ? 4 : 20, {duration: 200}),
+      };
+    }
+  }, [!!title, !!placeholder, !!value]);
 
-  const phStyle = useAnimatedStyle(() => {
-    return {
-      opacity: withTiming(focus?.value ? 0 : 1, {duration: 100}),
-    };
-  });
+  function getStyle(name: string, ...otherStyles: any[]) {
+    const anyStyles: any = styles;
+    return [
+      anyStyles[name],
+      anyStyles[name + type],
+      !editable && anyStyles[name + 'Disabled'],
+      title && anyStyles[name + type + 'HasTitle'],
+      !value && anyStyles[name + 'Empty'],
+      ...otherStyles,
+    ].filter(s => s);
+  }
 
   return (
-    <View style={[styles.container, style]}>
-      <Pressable onPress={onPress}>
-        <View style={rounded ? styles.borderRounded : styles.border} />
-        {!!title && !rounded && (
-          <Animated.Text style={[styles.title, titleStyle]} numberOfLines={1}>
+    <View
+      style={[styles.container, style]}
+      pointerEvents={editable ? 'auto' : 'none'}
+    >
+      <Pressable style={getStyle('border')} onPress={onPress}>
+        {!!title && (
+          <Animated.Text
+            style={getStyle('title', titleStyle)}
+            numberOfLines={1}
+          >
             {title}
           </Animated.Text>
         )}
-        {!value && !!placeholder && (
-          <Animated.Text style={[styles.placeholder, phStyle]}>
-            {placeholder}
-          </Animated.Text>
+        {children ? (
+          children({
+            style: getStyle('value'),
+            placeholderTextColor: styles.valueEmpty.color,
+          })
+        ) : (
+          <Text style={getStyle('value')}>{value || placeholder || ' '}</Text>
         )}
-        {children}
+        {icon}
       </Pressable>
       {!!error && <Text style={styles.error}>{error}</Text>}
     </View>
