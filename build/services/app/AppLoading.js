@@ -21,4 +21,3 @@ const styles = createStyles({
         flex: 1,
     },
 });
-//# sourceMappingURL=AppLoading.js.map

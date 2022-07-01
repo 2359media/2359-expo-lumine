@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { colors } from './colors';
 import { fonts } from './fonts';
 export interface Theme {
@@ -26,6 +27,11 @@ export declare const defaultTheme: {
         disabledD1: string;
         black: string;
         white: string;
+        greyL3: string;
+        greyL2: string;
+        greyL1: string;
+        grey: string;
+        greyD1: string;
     };
 };
 export declare const ThemeContext: import("react").Context<Theme>;

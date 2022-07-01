@@ -27,4 +27,3 @@ export async function loadEnv() {
     }
     catch { }
 }
-//# sourceMappingURL=index.js.map

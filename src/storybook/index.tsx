@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, TouchableOpacity} from 'react-native';
+import {FlatList, TouchableHighlight} from 'react-native';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Body1} from '..';
@@ -18,17 +18,19 @@ function Storybook() {
       data={componentStories}
       keyExtractor={item => item.name}
       renderItem={({item}) => (
-        <TouchableOpacity
+        <TouchableHighlight
           style={{
             borderColor: '#DDD',
+            backgroundColor: 'white',
             borderBottomWidth: 1,
           }}
+          underlayColor="#DDD"
           onPress={() => nav.navigate(item.name)}
         >
           <Body1 style={{marginHorizontal: 16, marginVertical: 12}}>
             {item.name}
           </Body1>
-        </TouchableOpacity>
+        </TouchableHighlight>
       )}
     />
   );

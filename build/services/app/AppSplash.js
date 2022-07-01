@@ -59,4 +59,3 @@ const useThemeStyles = createThemeStyles(({ colors }) => ({
         color: 'white',
     },
 }));
-//# sourceMappingURL=AppSplash.js.map

@@ -1,1 +1,0 @@
-{"version":3,"file":"state.js","sourceRoot":"","sources":["../../../src/services/store/state.ts"],"names":[],"mappings":"AAAA,OAAO,EAAQ,YAAY,EAAC,MAAM,cAAc,CAAC","sourcesContent":["export {State, initialState} from '../../bridge';\n"]}

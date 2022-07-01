@@ -7,4 +7,3 @@ export const defaultTheme = {
     colors,
 };
 export const ThemeContext = createContext(defaultTheme);
-//# sourceMappingURL=theme.js.map

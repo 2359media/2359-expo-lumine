@@ -19,4 +19,3 @@ export * from './colors';
 export * from './fonts';
 export * from './shadows';
 export * from './theme';
-//# sourceMappingURL=index.js.map

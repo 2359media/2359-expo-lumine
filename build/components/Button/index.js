@@ -12,17 +12,17 @@ export function Button(props) {
             anyStyles[name],
             anyStyles[name + type],
             rounded && anyStyles[name + type + 'Rounded'],
-            disabled && anyStyles[name + type + 'Disabled'],
             small && anyStyles[name + type + 'Small'],
             large && anyStyles[name + type + 'Large'],
             pressed && anyStyles[name + type + 'Pressed'],
+            disabled && anyStyles[name + type + 'Disabled'],
             s,
             pressed && ps,
         ].filter(s => s);
     }
     return (React.createElement(Pressable, { disabled: disabled, hitSlop: hitSlop, style: ({ pressed }) => getStyle('container', pressed, style, sx?.pressed), onPress: () => onPress?.(value), ...rest }, ({ pressed }) => (React.createElement(React.Fragment, null,
         icon && (React.createElement(Image, { style: getStyle('icon', pressed, sx?.icon, sx?.iconPressed), source: icon })),
-        !!text && (React.createElement(Text, { style: getStyle('text', pressed, sx?.text, sx?.textPressed) }, text)),
+        !!text && (React.createElement(Text, { style: getStyle('text', pressed, sx?.text, sx?.textPressed), numberOfLines: 1 }, text)),
         children))));
 }
 const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
@@ -118,4 +118,3 @@ const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
         fontSize: 20,
     },
 }));
-//# sourceMappingURL=index.js.map

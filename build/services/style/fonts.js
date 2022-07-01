@@ -14,4 +14,3 @@ export const fonts = {
     /** medium */ primary600: 'OpenSans_600SemiBold',
     /** bold */ primary700: 'OpenSans_700Bold',
 };
-//# sourceMappingURL=fonts.js.map

@@ -81,4 +81,3 @@ export const Body2 = createTypography('Body2');
 export const Body3 = createTypography('Body3');
 export const Body4 = createTypography('Body4');
 export const FootNote = createTypography('FootNote');
-//# sourceMappingURL=index.js.map

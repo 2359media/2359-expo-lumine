@@ -40,4 +40,3 @@ export function createReducer(initialState) {
         return newState;
     };
 }
-//# sourceMappingURL=reducer.js.map

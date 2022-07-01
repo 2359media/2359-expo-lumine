@@ -30,4 +30,3 @@ function removeItem(persistKey) {
         : Storage.removeItem(key);
 }
 export default { setItem, getItem, removeItem };
-//# sourceMappingURL=storage.js.map

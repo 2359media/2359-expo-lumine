@@ -9,4 +9,3 @@ export const shadows = {
         elevation: 2,
     },
 };
-//# sourceMappingURL=shadows.js.map

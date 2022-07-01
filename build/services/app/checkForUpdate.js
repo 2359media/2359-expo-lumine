@@ -14,4 +14,3 @@ export async function checkForUpdate(updateText) {
         await forSeconds(2);
     }
 }
-//# sourceMappingURL=checkForUpdate.js.map

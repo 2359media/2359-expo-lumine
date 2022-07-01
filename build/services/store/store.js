@@ -51,4 +51,3 @@ export function createStore(props) {
         loadStore,
     };
 }
-//# sourceMappingURL=store.js.map
