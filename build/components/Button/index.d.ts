@@ -1,8 +1,7 @@
 import { ViewProps } from 'react-native';
-export interface ButtonProps<T> extends ViewProps {
+export interface ButtonProps extends ViewProps {
     text?: string;
     icon?: any;
-    value?: T;
     sx?: {
         text?: any;
         icon?: any;
@@ -11,11 +10,12 @@ export interface ButtonProps<T> extends ViewProps {
         iconPressed?: any;
     };
     secondary?: boolean;
+    danger?: boolean;
     link?: boolean;
     small?: boolean;
     large?: boolean;
     rounded?: boolean;
     disabled?: boolean;
-    onPress?(value?: T): void;
+    onPress?(): void;
 }
-export declare function Button<T>(props: ButtonProps<T>): JSX.Element;
+export declare function Button(props: ButtonProps): JSX.Element;

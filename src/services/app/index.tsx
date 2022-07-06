@@ -3,6 +3,7 @@ import {ViewProps} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {loadFonts} from '../style';
 import {AppLoading} from './AppLoading';
+import {AppModal} from './AppModal';
 import {checkForUpdate} from './checkForUpdate';
 
 interface Props extends ViewProps {
@@ -13,7 +14,12 @@ export function AppProvider(props: Props) {
   const otherAsyncs = props.asyncs ?? [];
   return (
     <AppLoading asyncs={[checkForUpdate, loadFonts, ...otherAsyncs]}>
-      <SafeAreaProvider style={{flex: 1}}>{props.children}</SafeAreaProvider>
+      <SafeAreaProvider style={{flex: 1}}>
+        {props.children}
+        <AppModal />
+      </SafeAreaProvider>
     </AppLoading>
   );
 }
+
+export * from './AppModal';

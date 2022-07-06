@@ -4,10 +4,9 @@ import {createThemeStyles} from '../../services/style';
 
 const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
 
-export interface ButtonProps<T> extends ViewProps {
+export interface ButtonProps extends ViewProps {
   text?: string;
   icon?: any;
-  value?: T;
   sx?: {
     text?: any;
     icon?: any;
@@ -16,15 +15,16 @@ export interface ButtonProps<T> extends ViewProps {
     iconPressed?: any;
   };
   secondary?: boolean;
+  danger?: boolean;
   link?: boolean;
   small?: boolean;
   large?: boolean;
   rounded?: boolean;
   disabled?: boolean;
-  onPress?(value?: T): void;
+  onPress?(): void;
 }
 
-export function Button<T>(props: ButtonProps<T>) {
+export function Button(props: ButtonProps) {
   const {
     text,
     icon,
@@ -37,13 +37,11 @@ export function Button<T>(props: ButtonProps<T>) {
     disabled,
     style,
     children,
-    value,
     onPress,
     ...rest
   } = props;
 
   const styles = useThemeStyles();
-
   const type = (secondary && 'Secondary') || (link && 'Link') || 'Primary';
 
   function getStyle(name: string, pressed: boolean, s: any, ps: any) {
@@ -66,7 +64,7 @@ export function Button<T>(props: ButtonProps<T>) {
       disabled={disabled}
       hitSlop={hitSlop}
       style={({pressed}) => getStyle('container', pressed, style, sx?.pressed)}
-      onPress={() => onPress?.(value)}
+      onPress={() => onPress?.()}
       {...rest}
     >
       {({pressed}) => (

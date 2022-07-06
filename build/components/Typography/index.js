@@ -6,7 +6,7 @@ function createTypography(name) {
     return function Typography(props) {
         const styles = useThemeStyles();
         const style = styles[key];
-        return React.createElement(Text, { ...props, style: [style, props.style] });
+        return <Text {...props} style={[style, props.style]}/>;
     };
 }
 const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({

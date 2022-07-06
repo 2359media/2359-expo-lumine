@@ -3,7 +3,7 @@ import {createStory} from '../Story';
 
 export default createStory({
   name: 'Button',
-  Component: Button<any>,
+  Component: Button,
   options: {
     text: ['Button'],
     secondary: [false, true],
@@ -13,4 +13,8 @@ export default createStory({
     rounded: [false, true],
     disabled: [false, true],
   },
+  radios: [
+    ['secondary', 'link'],
+    ['small', 'large'],
+  ],
 });

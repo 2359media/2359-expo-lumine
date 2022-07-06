@@ -7,13 +7,12 @@ export interface InputProps<T> {
     error?: string;
     editable?: boolean;
     value?: T;
-    onValueChange?(value: T): void;
+    onValueChange?(value?: T): void;
     rounded?: boolean;
 }
 export interface InputContainerProps<T> extends InputProps<T>, ViewProps {
     children?(props: any): any;
     onPress?(): void;
     focus?: SharedValue<boolean>;
-    inputType?: 'text' | 'textInput';
 }
 export declare function InputContainer<T>(props: InputContainerProps<T>): JSX.Element;

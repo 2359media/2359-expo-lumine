@@ -3,7 +3,7 @@ import { Text, Image, Pressable } from 'react-native';
 import { createThemeStyles } from '../../services/style';
 const hitSlop = { bottom: 8, top: 8, right: 8, left: 8 };
 export function Button(props) {
-    const { text, icon, sx, secondary, link, small, large, rounded, disabled, style, children, value, onPress, ...rest } = props;
+    const { text, icon, sx, secondary, link, small, large, rounded, disabled, style, children, onPress, ...rest } = props;
     const styles = useThemeStyles();
     const type = (secondary && 'Secondary') || (link && 'Link') || 'Primary';
     function getStyle(name, pressed, s, ps) {
@@ -20,10 +20,15 @@ export function Button(props) {
             pressed && ps,
         ].filter(s => s);
     }
-    return (React.createElement(Pressable, { disabled: disabled, hitSlop: hitSlop, style: ({ pressed }) => getStyle('container', pressed, style, sx?.pressed), onPress: () => onPress?.(value), ...rest }, ({ pressed }) => (React.createElement(React.Fragment, null,
-        icon && (React.createElement(Image, { style: getStyle('icon', pressed, sx?.icon, sx?.iconPressed), source: icon })),
-        !!text && (React.createElement(Text, { style: getStyle('text', pressed, sx?.text, sx?.textPressed), numberOfLines: 1 }, text)),
-        children))));
+    return (<Pressable disabled={disabled} hitSlop={hitSlop} style={({ pressed }) => getStyle('container', pressed, style, sx?.pressed)} onPress={() => onPress?.()} {...rest}>
+      {({ pressed }) => (<>
+          {icon && (<Image style={getStyle('icon', pressed, sx?.icon, sx?.iconPressed)} source={icon}/>)}
+          {!!text && (<Text style={getStyle('text', pressed, sx?.text, sx?.textPressed)} numberOfLines={1}>
+              {text}
+            </Text>)}
+          {children}
+        </>)}
+    </Pressable>);
 }
 const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
     container: {

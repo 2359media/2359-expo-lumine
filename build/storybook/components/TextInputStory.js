@@ -4,8 +4,8 @@ export default createStory({
     name: 'TextInput',
     Component: TextInput,
     options: {
-        title: [undefined, 'Title'],
-        placeholder: [undefined, 'This is a placeholder'],
+        title: ['Title', undefined],
+        placeholder: ['This is a placeholder', undefined],
         value: [
             '',
             'This is a simple value',

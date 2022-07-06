@@ -21,13 +21,17 @@ export default function AppSplash({ text, done }) {
     if (hidden) {
         return null;
     }
-    return (React.createElement(Animated.View, { style: styles.splash(opacityA) },
-        React.createElement(ImageBackground, { style: styles.image, source: require('../../bridge').splashImage, resizeMode: "cover" },
-            React.createElement(View, { style: styles.textContainer },
-                React.createElement(Text, { style: styles.text },
-                    versionString,
-                    '\n',
-                    text)))));
+    return (<Animated.View style={styles.splash(opacityA)}>
+      <ImageBackground style={styles.image} source={require('../../bridge').splashImage} resizeMode="cover">
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>
+            {versionString}
+            {'\n'}
+            {text}
+          </Text>
+        </View>
+      </ImageBackground>
+    </Animated.View>);
 }
 const useThemeStyles = createThemeStyles(({ colors }) => ({
     container: {

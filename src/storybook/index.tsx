@@ -6,6 +6,7 @@ import {Body1} from '..';
 
 const componentStories = [
   require('./components/ButtonStory').default,
+  require('./components/DateInputStory').default,
   require('./components/TextInputStory').default,
   require('./components/TypographyStory').default,
 ];

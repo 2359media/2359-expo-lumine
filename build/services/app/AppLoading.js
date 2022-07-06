@@ -12,9 +12,10 @@ export function AppLoading({ asyncs, children }) {
             .catch(() => { });
         Promise.all(asyncs.map(a => a(setText).catch(() => { }))).finally(() => setDone(true));
     }, []);
-    return (React.createElement(View, { style: styles.container },
-        React.createElement(AppSplash, { text: text, done: done }),
-        done && children));
+    return (<View style={styles.container}>
+      <AppSplash text={text} done={done}/>
+      {done && children}
+    </View>);
 }
 const styles = createStyles({
     container: {

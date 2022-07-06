@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "../build",
     "inlineSources": false,
+    "jsx": "react-native",
     "sourceMap": false
   },
   "include": ["../src"],

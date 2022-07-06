@@ -6,7 +6,7 @@ import {
   Image,
 } from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
-import {InputContainer, InputProps} from './InputContainer';
+import {InputContainer, InputProps} from '../Input';
 
 const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
 
@@ -39,7 +39,7 @@ export function TextInput(props: TextInputProps) {
       icon={
         props.secureTextEntry && (
           <Pressable hitSlop={hitSlop} onPress={() => setSecure(!secure)}>
-            <Image source={require('../../services/res/icons/eyeOn.png')} />
+            <Image source={require('../../../assets/iconEyeOn20.png')} />
           </Pressable>
         )
       }
@@ -47,9 +47,9 @@ export function TextInput(props: TextInputProps) {
       {styleProps => (
         <RNTI
           ref={tiRef}
+          onChangeText={props.onValueChange}
           {...props}
           {...styleProps}
-          onChangeText={props.onValueChange}
           onFocus={onFocus}
           onBlur={onBlur}
           secureTextEntry={secure}
