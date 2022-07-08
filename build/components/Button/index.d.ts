@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ViewProps } from 'react-native';
 export interface ButtonProps extends ViewProps {
     text?: string;

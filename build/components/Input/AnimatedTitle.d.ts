@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { TextProps } from 'react-native';
 import { SharedValue } from 'react-native-reanimated';
 interface AnimatedTitleProps extends TextProps {

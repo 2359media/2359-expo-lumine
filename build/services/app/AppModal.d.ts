@@ -1,3 +1,4 @@
+/// <reference types="react" />
 interface ModalConfig {
     position?: 'bottom' | 'center';
     disableBackHandler?: boolean;

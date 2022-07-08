@@ -3,13 +3,15 @@ import {View} from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import AppSplash from './AppSplash';
 import {createStyles} from '../style';
+import {versionString} from './version';
 
 interface Props {
   asyncs: ((updateText: (t: string) => void) => Promise<any>)[];
+  SplashView?: any;
   children: any;
 }
 
-export function AppLoading({asyncs, children}: Props) {
+export function AppLoading({asyncs, children, SplashView}: Props) {
   const [done, setDone] = useState(false);
   const [text, setText] = useState('');
 
@@ -24,7 +26,9 @@ export function AppLoading({asyncs, children}: Props) {
 
   return (
     <View style={styles.container}>
-      <AppSplash text={text} done={done} />
+      <AppSplash done={done}>
+        {SplashView && <SplashView text={`${versionString}\n${text}`} />}
+      </AppSplash>
       {done && children}
     </View>
   );

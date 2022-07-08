@@ -1,1 +1,2 @@
-export default function AppSplash({ text, done }: any): JSX.Element | null;
+/// <reference types="react" />
+export default function AppSplash({ children, done }: any): JSX.Element | null;

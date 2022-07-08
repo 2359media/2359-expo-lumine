@@ -6,7 +6,7 @@ import { AppModal } from './AppModal';
 import { checkForUpdate } from './checkForUpdate';
 export function AppProvider(props) {
     const otherAsyncs = props.asyncs ?? [];
-    return (<AppLoading asyncs={[checkForUpdate, loadFonts, ...otherAsyncs]}>
+    return (<AppLoading SplashView={props.SplashView} asyncs={[checkForUpdate, loadFonts, ...otherAsyncs]}>
       <SafeAreaProvider style={{ flex: 1 }}>
         {props.children}
         <AppModal />

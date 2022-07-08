@@ -1,12 +1,10 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Text, ImageBackground, Animated, View} from 'react-native';
-import {absoluteFillObject, createThemeStyles} from '../style';
-import {versionString} from './version';
+import {Animated} from 'react-native';
+import {absoluteFillObject, createStyles} from '../style';
 
-export default function AppSplash({text, done}: any) {
+export default function AppSplash({children, done}: any) {
   const opacityA = useMemo(() => new Animated.Value(1), []);
   const [hidden, setHidden] = useState(false);
-  const styles = useThemeStyles();
 
   useEffect(() => {
     if (done) {
@@ -26,51 +24,14 @@ export default function AppSplash({text, done}: any) {
   }
 
   return (
-    <Animated.View style={styles.splash(opacityA)}>
-      <ImageBackground
-        style={styles.image}
-        source={require('../../bridge').splashImage}
-        resizeMode="cover"
-      >
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>
-            {versionString}
-            {'\n'}
-            {text}
-          </Text>
-        </View>
-      </ImageBackground>
-    </Animated.View>
+    <Animated.View style={styles.splash(opacityA)}>{children}</Animated.View>
   );
 }
 
-const useThemeStyles = createThemeStyles(({colors}) => ({
-  container: {
-    flex: 1,
-  },
+const styles = createStyles({
   splash: (opacityA: Animated.Value) => ({
     ...absoluteFillObject,
     zIndex: 100,
     opacity: opacityA,
   }),
-  image: {
-    flex: 1,
-    backgroundColor: colors.background,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  textContainer: {
-    backgroundColor: 'black',
-    padding: 8,
-    borderRadius: 8,
-    alignSelf: 'center',
-    marginBottom: 50,
-    // opacity: 0.5,
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-}));
+});

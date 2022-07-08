@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ViewProps } from 'react-native';
 import { SharedValue } from 'react-native-reanimated';
 export interface InputProps<T> {

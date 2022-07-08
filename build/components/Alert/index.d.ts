@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { AlertButton } from 'react-native';
 interface AlertProps {
     title?: string;

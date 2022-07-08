@@ -1,3 +1,4 @@
+/// <reference types="react" />
 declare type Options<T extends Object> = Partial<{
     [key in keyof T]: T[key][];
 }>;

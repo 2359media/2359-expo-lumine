@@ -8,12 +8,16 @@ import {checkForUpdate} from './checkForUpdate';
 
 interface Props extends ViewProps {
   asyncs?: ((updateText: (t: string) => void) => Promise<any>)[];
+  SplashView?: (props: {text?: string}) => any;
 }
 
 export function AppProvider(props: Props) {
   const otherAsyncs = props.asyncs ?? [];
   return (
-    <AppLoading asyncs={[checkForUpdate, loadFonts, ...otherAsyncs]}>
+    <AppLoading
+      SplashView={props.SplashView}
+      asyncs={[checkForUpdate, loadFonts, ...otherAsyncs]}
+    >
       <SafeAreaProvider style={{flex: 1}}>
         {props.children}
         <AppModal />
