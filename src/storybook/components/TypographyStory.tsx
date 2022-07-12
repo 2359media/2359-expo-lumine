@@ -1,4 +1,4 @@
-import React from 'react-native';
+import React from 'react';
 import {H1, H2, H3, H4, H5, Body1, Body2, Body3, Body4} from '../../';
 import {createStory} from '../Story';
 

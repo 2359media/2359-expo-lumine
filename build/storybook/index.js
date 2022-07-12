@@ -6,6 +6,7 @@ import { Text } from '..';
 const componentStories = [
     require('./components/ButtonStory').default,
     require('./components/DateInputStory').default,
+    require('./components/PageViewStory').default,
     require('./components/TextInputStory').default,
     require('./components/TextStory').default,
 ];

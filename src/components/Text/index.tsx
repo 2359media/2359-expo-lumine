@@ -20,7 +20,7 @@ export function Text(props: Props) {
 }
 
 function getStyle(styles: any, props: Props) {
-  const style = [];
+  const style: any = [];
   const type =
     ['h1', 'h2', 'h3', 'h4', 'h5', 'p2', 'p3', 'p4', 'f1'].find(
       t => props[t as keyof Props]
