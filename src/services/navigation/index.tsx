@@ -32,7 +32,9 @@ export function createNavigator<T extends ParamListBase>() {
   function createScreen<K extends KR>(key: K, screen: S<K>) {
     screens[key] = screen;
     if (__DEV__) {
-      nav?.setParams(nav.getCurrentRoute()?.params as any);
+      setTimeout(() => {
+        nav?.setParams(nav.getCurrentRoute()?.params as any);
+      }, 200);
     }
     return screen;
   }

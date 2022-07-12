@@ -14,7 +14,9 @@ export function createNavigator() {
     function createScreen(key, screen) {
         screens[key] = screen;
         if (__DEV__) {
-            nav?.setParams(nav.getCurrentRoute()?.params);
+            setTimeout(() => {
+                nav?.setParams(nav.getCurrentRoute()?.params);
+            }, 200);
         }
         return screen;
     }
