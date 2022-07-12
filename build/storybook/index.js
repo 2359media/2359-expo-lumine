@@ -2,12 +2,12 @@ import React from 'react';
 import { FlatList, TouchableHighlight } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Body1 } from '..';
+import { Text } from '..';
 const componentStories = [
     require('./components/ButtonStory').default,
     require('./components/DateInputStory').default,
     require('./components/TextInputStory').default,
-    require('./components/TypographyStory').default,
+    require('./components/TextStory').default,
 ];
 function Storybook() {
     const nav = useNavigation();
@@ -16,9 +16,9 @@ function Storybook() {
                 backgroundColor: 'white',
                 borderBottomWidth: 1,
             }} underlayColor="#DDD" onPress={() => nav.navigate(item.name)}>
-          <Body1 style={{ marginHorizontal: 16, marginVertical: 12 }}>
+          <Text style={{ marginHorizontal: 16, marginVertical: 12 }}>
             {item.name}
-          </Body1>
+          </Text>
         </TouchableHighlight>)}/>);
 }
 const Stack = createNativeStackNavigator();

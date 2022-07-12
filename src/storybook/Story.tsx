@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ScrollView, View} from 'react-native';
-import {H5, Button} from '..';
+import {Text, Button} from '..';
 
 type Options<T extends Object> = Partial<{[key in keyof T]: T[key][]}>;
 
@@ -63,7 +63,7 @@ export function createStory<T extends Object>({
         )}
         {stateKeys.map(k => (
           <React.Fragment key={k}>
-            <H5>{k}</H5>
+            <Text h5>{k}</Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -82,6 +82,8 @@ export function createStory<T extends Object>({
                       ? 'Yes'
                       : typeof v == 'object'
                       ? v.toString()
+                      : typeof v == 'function'
+                      ? 'Function'
                       : v
                   }
                   onPress={() => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { H5, Button } from '..';
+import { Text, Button } from '..';
 export function createStory({ name, Component, options: ops = {}, radios, }) {
     const initialState = {};
     let _setState;
@@ -27,7 +27,7 @@ export function createStory({ name, Component, options: ops = {}, radios, }) {
         <Component {...state}/>
         {stateKeys.length > 0 && (<View style={{ marginVertical: 24, height: 1, backgroundColor: '#DDD' }}/>)}
         {stateKeys.map(k => (<React.Fragment key={k}>
-            <H5>{k}</H5>
+            <Text h5>{k}</Text>
             <View style={{
                     flexDirection: 'row',
                     marginBottom: 16,
@@ -39,7 +39,9 @@ export function createStory({ name, Component, options: ops = {}, radios, }) {
                             ? 'Yes'
                             : typeof v == 'object'
                                 ? v.toString()
-                                : v} onPress={() => {
+                                : typeof v == 'function'
+                                    ? 'Function'
+                                    : v} onPress={() => {
                         const resetState = {};
                         radios
                             ?.find(r => r.includes(k))
