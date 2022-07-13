@@ -11,7 +11,7 @@ export default function Indicator(props: IndicatorProps) {
   const {indexA, numberOfPages, style} = props;
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, style]} pointerEvents="none">
       {[...Array(numberOfPages)].map((_, i) => (
         <View style={styles.indicator} key={i}>
           <Animated.View style={styles.indicatorContent(indexA, i)} />

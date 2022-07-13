@@ -3,7 +3,7 @@ import { Animated, View } from 'react-native';
 import { createStyles, colors } from '../../services/style';
 export default function Indicator(props) {
     const { indexA, numberOfPages, style } = props;
-    return (<View style={[styles.container, style]}>
+    return (<View style={[styles.container, style]} pointerEvents="none">
       {[...Array(numberOfPages)].map((_, i) => (<View style={styles.indicator} key={i}>
           <Animated.View style={styles.indicatorContent(indexA, i)}/>
         </View>))}

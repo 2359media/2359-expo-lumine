@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { TextProps } from 'react-native';
 export declare const H1: (props: TextProps) => JSX.Element;
 export declare const H2: (props: TextProps) => JSX.Element;

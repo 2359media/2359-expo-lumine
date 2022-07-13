@@ -4,30 +4,30 @@ import Context, {ContextValue} from './Context';
 import Indicator from './Indicator';
 import {createStyles} from '../../services/style';
 
-interface PageViewProps extends ViewProps {
-  indicator?: (index: number, indexA: Animated.AnimatedInterpolation) => any;
+interface PageViewProps<T> extends ViewProps {
+  data?: T[];
+  renderItem?(item: T, index: number): any;
 }
 
-export function PageView(props: PageViewProps) {
+export function PageView<T>(props: PageViewProps<T>) {
   const offsetA = useMemo(() => new Animated.Value(0), []);
   const ref = useRef<View>(null);
   const [width, setWidth] = useState(0);
-  const [indicatorFrame, setIndicatorFrame] = useState<LayoutRectangle>();
+  const [footerFrame, setFooterFrame] = useState<LayoutRectangle>();
   const value: ContextValue = useMemo(
     () => ({
       offsetA,
-      indicatorFrame,
-      setIndicatorFrame,
+      footerFrame,
+      setFooterFrame,
       containerRef: ref,
     }),
-    [indicatorFrame]
+    [footerFrame]
   );
   const indexA = useMemo(
     () =>
       offsetA.interpolate({inputRange: [0, width || 320], outputRange: [0, 1]}),
     [width]
   );
-  const cs = Array.isArray(props.children) ? props.children : [props.children];
 
   return (
     <Context.Provider value={value}>
@@ -47,20 +47,21 @@ export function PageView(props: PageViewProps) {
           )}
         >
           {width > 0 &&
-            cs.map((c, i) => (
+            props.data?.map((d, i) => (
               <View key={i} style={styles.page(width)}>
-                {c}
+                {props.renderItem?.(d, i)}
               </View>
             ))}
         </Animated.ScrollView>
         <Indicator
           indexA={indexA}
-          numberOfPages={cs.length}
+          numberOfPages={props.data?.length ?? 0}
           style={{
             position: 'absolute',
-            top: indicatorFrame?.y,
+            top: footerFrame ? footerFrame.y - 24 : undefined,
             left: 0,
             right: 0,
+            bottom: footerFrame ? undefined : 0,
           }}
         />
       </View>
@@ -68,7 +69,7 @@ export function PageView(props: PageViewProps) {
   );
 }
 
-PageView.IndicatorFrame = require('./IndicatorFrame').default;
+PageView.Footer = require('./Footer').default;
 
 export const styles = createStyles({
   container: {

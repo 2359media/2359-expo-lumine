@@ -1,49 +1,39 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { PageView, Text, Button, createStyles, Scaffold } from '../..';
+const data = [
+    {
+        title: 'Welcome!',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+    {
+        title: 'Welcome!',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+    {
+        title: 'Welcome!',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+];
 function PageViewStory() {
-    return (<PageView>
-      <Scaffold.View>
-        <Text h1 style={styles.title}>
-          Welcome!
-        </Text>
-        <Text style={styles.desc}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-        <Image style={styles.image} source={0}/>
-        <PageView.IndicatorFrame />
-      </Scaffold.View>
-      <Scaffold.View>
-        <Text h1 style={styles.title}>
-          Welcome!
-        </Text>
-        <Text style={styles.desc}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-        <Image style={styles.image} source={0}/>
-        <PageView.IndicatorFrame />
-      </Scaffold.View>
-      <Scaffold.View>
-        <Text h1 style={styles.title}>
-          Welcome!
-        </Text>
-        <Text style={styles.desc}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-        <Image style={styles.image} source={0}/>
-        <PageView.IndicatorFrame />
-        <Button rounded text="Login" style={styles.login}/>
-        <Text p2 style={styles.register}>
-          Don't have an account?{' '}
-          <Text p2 onPress={() => { }}>
-            Create One
+    return (<PageView data={data} renderItem={(item, i) => (<Scaffold.View>
+          <Text h1 style={styles.title}>
+            {item.title}
           </Text>
-        </Text>
-      </Scaffold.View>
-    </PageView>);
+          <Text style={styles.desc}>{item.desc}</Text>
+          <Image style={styles.image} source={0}/>
+          <PageView.Footer>
+            {i == data.length - 1 ? (<>
+                <Button rounded text="Login" style={styles.login}/>
+                <Text p2 style={styles.register}>
+                  Don't have an account?{' '}
+                  <Text p2 onPress={() => { }}>
+                    Create One
+                  </Text>
+                </Text>
+              </>) : undefined}
+          </PageView.Footer>
+        </Scaffold.View>)}/>);
 }
 export default {
     name: 'PageView',
@@ -52,7 +42,8 @@ export default {
 const styles = createStyles({
     title: {
         textAlign: 'center',
-        marginVertical: 16,
+        marginTop: 60,
+        marginBottom: 16,
     },
     desc: {
         textAlign: 'center',
@@ -61,7 +52,7 @@ const styles = createStyles({
         flex: 1,
         backgroundColor: '#DDD',
         marginTop: 48,
-        marginBottom: 16,
+        marginBottom: 40,
     },
     login: {
         marginTop: 16,

@@ -1,11 +1,12 @@
 /// <reference types="react" />
-import { Animated, ViewProps } from 'react-native';
-interface PageViewProps extends ViewProps {
-    indicator?: (index: number, indexA: Animated.AnimatedInterpolation) => any;
+import { ViewProps } from 'react-native';
+interface PageViewProps<T> extends ViewProps {
+    data?: T[];
+    renderItem?(item: T, index: number): any;
 }
-export declare function PageView(props: PageViewProps): JSX.Element;
+export declare function PageView<T>(props: PageViewProps<T>): JSX.Element;
 export declare namespace PageView {
-    var IndicatorFrame: any;
+    var Footer: any;
 }
 export declare const styles: {
     container: {
