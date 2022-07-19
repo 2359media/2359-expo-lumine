@@ -59,8 +59,8 @@ export function PageView<T>(props: PageViewProps<T>) {
           style={{
             position: 'absolute',
             top: footerFrame ? footerFrame.y - 24 : undefined,
-            left: 0,
-            right: 0,
+            left: footerFrame ? footerFrame?.x % width : 0,
+            width: footerFrame?.width ?? '100%',
             bottom: footerFrame ? undefined : 0,
           }}
         />

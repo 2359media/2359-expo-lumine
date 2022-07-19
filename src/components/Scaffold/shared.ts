@@ -35,7 +35,7 @@ export function useSafeStyles(hasTabBar?: boolean) {
           flexGrow: 1,
         },
         content: {
-          padding: 16,
+          padding: 24,
         },
         contentFull: {
           flex: 1,
@@ -57,8 +57,8 @@ export function useSafeStyles(hasTabBar?: boolean) {
           paddingTop: safeArea.top + 32,
         },
         bottomView: {
-          padding: 16,
-          paddingBottom: safeArea.bottom + 16,
+          padding: 24,
+          paddingBottom: safeArea.bottom + 24,
           backgroundColor: colors.white,
         },
       }),

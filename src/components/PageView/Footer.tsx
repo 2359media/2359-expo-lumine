@@ -8,15 +8,20 @@ export default function Footer(props: ViewProps) {
   const widthRef = useRef<number>(0);
 
   function measure() {
+    if (!ref || !containerRef) {
+      return;
+    }
     ref?.current?.measureLayout(
       containerRef?.current,
       (x, y, width, height) => {
         const l = {x, y, width, height};
         if (Math.abs(widthRef.current - width) > 1) {
           widthRef.current = width;
-          if (!footerFrame || Math.abs(l.y - footerFrame.y) > 1) {
-            setFooterFrame?.(l);
-          }
+          setTimeout(() => {
+            if (!footerFrame || Math.abs(l.y - footerFrame.y) > 1) {
+              setFooterFrame?.(l);
+            }
+          }, 100);
         }
       },
       () => {}
