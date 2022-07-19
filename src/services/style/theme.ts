@@ -8,10 +8,20 @@ export interface Theme {
   colors: typeof colors;
 }
 
-export const defaultTheme = {
+export const defaultTheme: Theme = {
   key: 'default',
   fonts,
   colors,
+};
+
+export const darkTheme: Theme = {
+  ...defaultTheme,
+  key: 'dark',
+  colors: {
+    ...defaultTheme.colors,
+    background: colors.foreground,
+    foreground: colors.background,
+  },
 };
 
 export const ThemeContext = createContext<Theme>(defaultTheme);

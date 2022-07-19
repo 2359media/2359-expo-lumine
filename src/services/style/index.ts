@@ -1,6 +1,7 @@
-import {useContext} from 'react';
+import {useContext, useMemo} from 'react';
 import {ImageStyle, TextStyle, StyleSheet} from 'react-native';
-import {ThemeContext, Theme} from './theme';
+import {deepMerge} from '../store/utils';
+import {ThemeContext, Theme, defaultTheme} from './theme';
 
 type AllStyles = TextStyle & ImageStyle;
 type Style = {[K in keyof AllStyles]: AllStyles[K] | object};
@@ -11,13 +12,9 @@ export function createStyles<T extends Styles>(styles: T): T {
 }
 
 export function createThemeStyles<T extends Styles>(fn: (t: Theme) => T) {
-  const cacheStyles: {[key: string]: T} = {};
   return function useThemeStyles() {
     const theme = useContext(ThemeContext);
-    if (!cacheStyles[theme.key]) {
-      cacheStyles[theme.key] = fn(theme);
-    }
-    return cacheStyles[theme.key];
+    return useMemo(() => fn(theme), [theme]);
   };
 }
 

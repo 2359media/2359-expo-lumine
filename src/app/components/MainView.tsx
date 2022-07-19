@@ -7,6 +7,7 @@ interface MainViewProps {
   topImage?: any;
   topTitle?: string;
   topDesc?: string;
+  topContent?: any;
   title?: string;
   desc?: string;
   tint?: string;
@@ -51,6 +52,7 @@ export function MainView(props: MainViewProps) {
               {props.topDesc}
             </Text>
           )}
+          {props.topContent}
         </View>
         <View style={styles.section}>
           <View style={styles.titleContainer}>
@@ -91,9 +93,7 @@ export function MainView(props: MainViewProps) {
 }
 
 const styles = createStyles({
-  container: (tint?: string) => ({
-    backgroundColor: tint,
-  }),
+  container: (tint?: string) => (tint ? {backgroundColor: tint} : {}),
   contentContainer: {
     paddingTop: 48,
     paddingBottom: 24,
