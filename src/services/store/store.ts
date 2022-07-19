@@ -21,8 +21,14 @@ export function createStore<T extends Object>(props: StoreProps<T>) {
   const getState = store.getState;
   const subscribe = store.subscribe;
 
-  function updateState(newState: DeepPartial<T>) {
-    store.dispatch({type: actionTypes.update, payload: newState});
+  function updateState(
+    newState: DeepPartial<T> | ((state: T) => DeepPartial<T>)
+  ) {
+    store.dispatch({
+      type: actionTypes.update,
+      payload:
+        typeof newState == 'function' ? newState(store.getState()) : newState,
+    });
   }
 
   function resetStateExcept(keys: (keyof T)[]) {

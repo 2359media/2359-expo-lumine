@@ -150,7 +150,7 @@ const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
     fontSize: 16,
   },
   textPrimary: {
-    color: colors.white,
+    color: colors.background,
   },
   textPrimaryDisabled: {
     color: colors.disabledD1,
@@ -174,12 +174,10 @@ const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
     color: colors.disabledD1,
   },
   textLinkSmall: {
-    color: colors.primary,
     fontSize: 14,
   },
   textLinkLarge: {
     fontFamily: fonts.primary700,
-    color: colors.primary,
     fontSize: 20,
   },
 }));

@@ -7,7 +7,8 @@ export function LandingScreen() {
   const nav = useNavigation();
   return (
     <MainView
-      tint="#FFFFFF"
+      tint="#FFF"
+      tintD1="#FFFD"
       backgroundTint={colors.primary}
       coverImage={require('../services/res/landingBg.png')}
       logoImage={require('../services/res/logo.png')}

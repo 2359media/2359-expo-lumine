@@ -5,7 +5,8 @@ import {MainView} from '../components/MainView';
 export function MainScreenPage4() {
   return (
     <MainView
-      tint="#FFFFFF"
+      tint="#FFF"
+      tintD1="#FFFD"
       backgroundTint={colors.primary}
       coverImage={require('../services/res/landingBg.png')}
       topTitle="Visit Us"

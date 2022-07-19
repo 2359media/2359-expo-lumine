@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useContext, useMemo} from 'react';
 import {View, Image} from 'react-native';
-import {Scaffold, Text, PageView, Button, createStyles, colors} from '../..';
+import {
+  Scaffold,
+  Text,
+  PageView,
+  Button,
+  createStyles,
+  colors,
+  ThemeContext,
+} from '../..';
 import {AutoDirectionView} from '../components/AutoDirectionView';
+import {useSelector} from '../services/store';
 
 interface MainViewProps {
   topImage?: any;
@@ -11,6 +20,7 @@ interface MainViewProps {
   title?: string;
   desc?: string;
   tint?: string;
+  tintD1?: string;
   backgroundTint?: string;
   actionText?: string;
   coverImage?: any;
@@ -19,81 +29,96 @@ interface MainViewProps {
 }
 
 export function MainView(props: MainViewProps) {
+  const theme = useContext(ThemeContext);
+  const styleIndex = useSelector(s => s.settings.styleIndex);
+  const tintTheme = useMemo(
+    () =>
+      props.tint
+        ? {
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary: props.tint,
+              primaryD1: props.tintD1 ?? props.tint,
+              background: props.backgroundTint ?? theme.colors.background,
+            },
+            key: theme.key + props.tint,
+          }
+        : theme,
+    [theme, props.tint]
+  );
   return (
-    <Scaffold.View
-      style={styles.container(props.backgroundTint)}
-      contentContainerStyle={styles.contentContainer}
-      topView={
-        props.coverImage && (
-          <Image
-            style={styles.coverImage}
-            resizeMode="stretch"
-            source={props.coverImage}
-          />
-        )
-      }
-    >
-      <AutoDirectionView>
-        <View style={styles.section}>
-          {props.topImage && (
+    <ThemeContext.Provider value={tintTheme}>
+      <Scaffold.View
+        contentContainerStyle={styles.contentContainer}
+        topView={
+          props.coverImage && (
             <Image
-              style={styles.topImage}
-              resizeMode="cover"
-              source={props.topImage}
+              style={styles.coverImage}
+              resizeMode="stretch"
+              source={props.coverImage}
             />
-          )}
-          {props.topTitle && (
-            <Text h1 style={styles.topTitle}>
-              {props.topTitle}
-            </Text>
-          )}
-          {props.topDesc && (
-            <Text p2 style={styles.topDesc}>
-              {props.topDesc}
-            </Text>
-          )}
-          {props.topContent}
-        </View>
-        <View style={styles.section}>
-          <View style={styles.titleContainer}>
-            {props.logoImage && (
+          )
+        }
+      >
+        <AutoDirectionView>
+          <View style={styles.section}>
+            {props.topImage && (
               <Image
-                style={styles.logo}
-                source={props.logoImage}
-                resizeMode="center"
+                style={styles.topImage}
+                resizeMode="cover"
+                source={props.topImage}
               />
             )}
-            {props.title && (
-              <Text h1 style={styles.title}>
-                {props.title}
+            {props.topTitle && (
+              <Text h1 style={styles.topTitle}>
+                {props.topTitle}
               </Text>
             )}
-            {props.desc && (
-              <Text p2 style={styles.desc}>
-                {props.desc}
+            {props.topDesc && (
+              <Text p2 style={styles.topDesc}>
+                {props.topDesc}
               </Text>
             )}
+            {props.topContent}
           </View>
-          <PageView.Footer>
-            <Button
-              style={styles.button(props.tint)}
-              rounded
-              sx={{
-                text: styles.buttonText(props.backgroundTint),
-                pressed: styles.buttonPressed,
-              }}
-              text={props.actionText}
-              onPress={props.action}
-            />
-          </PageView.Footer>
-        </View>
-      </AutoDirectionView>
-    </Scaffold.View>
+          <View style={styles.section}>
+            <View style={styles.titleContainer}>
+              {props.logoImage && (
+                <Image
+                  style={styles.logo}
+                  source={props.logoImage}
+                  resizeMode="center"
+                />
+              )}
+              {props.title && (
+                <Text h1 style={styles.title}>
+                  {props.title}
+                </Text>
+              )}
+              {props.desc && (
+                <Text p2 style={styles.desc}>
+                  {props.desc}
+                </Text>
+              )}
+            </View>
+            <PageView.Footer>
+              <Button
+                rounded={styleIndex == 0}
+                secondary={styleIndex == 1}
+                style={styles.button}
+                text={props.actionText}
+                onPress={props.action}
+              />
+            </PageView.Footer>
+          </View>
+        </AutoDirectionView>
+      </Scaffold.View>
+    </ThemeContext.Provider>
   );
 }
 
 const styles = createStyles({
-  container: (tint?: string) => (tint ? {backgroundColor: tint} : {}),
   contentContainer: {
     paddingTop: 48,
     paddingBottom: 24,
@@ -145,12 +170,7 @@ const styles = createStyles({
     flex: 1,
     alignSelf: 'center',
   },
-  button: (tint?: string) => ({
-    backgroundColor: tint,
+  button: {
     marginTop: 12,
-  }),
-  buttonPressed: {
-    opacity: 0.8,
   },
-  buttonText: (tint?: string) => (tint ? {color: tint} : {}),
 });

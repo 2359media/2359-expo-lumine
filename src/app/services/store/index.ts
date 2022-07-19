@@ -1,14 +1,18 @@
-import {createStore, Theme} from '../../..';
+import {createStore} from '../../..';
 
 interface State {
   settings: {
-    theme?: Theme;
+    themeIndex: number;
+    styleIndex: number;
   };
 }
 
 const store = createStore<State>({
   initialState: {
-    settings: {},
+    settings: {
+      themeIndex: 0,
+      styleIndex: 0,
+    },
   },
 });
 
