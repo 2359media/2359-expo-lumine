@@ -42,7 +42,7 @@ const useThemeStyles = createThemeStyles(({colors}) => ({
   }),
   text: (selected?: boolean) => ({
     fontSize: 14,
-    color: selected ? colors.white : colors.foreground,
+    color: selected ? colors.background : colors.foreground,
   }),
   itemPressed: {
     opacity: 0.8,

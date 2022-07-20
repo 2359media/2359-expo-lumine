@@ -1,5 +1,6 @@
 import React from 'react';
 import {PageView} from '../..';
+import {createScreen} from '../services/navigation';
 import {MainScreenPage1} from './MainScreen.Page1';
 import {MainScreenPage2} from './MainScreen.Page2';
 import {MainScreenPage3} from './MainScreen.Page3';
@@ -12,6 +13,6 @@ const data = [
   MainScreenPage4,
 ];
 
-export function MainScreen() {
+export default createScreen('Main', () => {
   return <PageView data={data} renderItem={(Item, i) => <Item />} />;
-}
+});

@@ -6,6 +6,7 @@ export * from './components/PageView';
 export * from './components/Tabs';
 export * from './components/Text';
 export * from './components/TextInput';
+export * from './components/TopNavigation';
 export * from './components/Typography';
 export * from './services/app';
 export * from './services/env';

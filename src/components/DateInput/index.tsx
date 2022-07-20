@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Platform, ViewProps, Image} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {format} from 'date-fns';
 import {InputContainer, InputProps} from '../Input';
 import {showCustomAlert} from '../Alert';
+import {ThemeContext} from '../../services/style';
 
 interface Props extends InputProps<Date>, ViewProps {
   defaultValue?: Date;
@@ -27,6 +28,7 @@ export function DateInput(props: Props) {
   } = props;
 
   const [androidPicker, setAndroidPicker] = useState<any>();
+  const theme = useContext(ThemeContext);
 
   function showTimeModal() {
     if (!value && defaultValue) {
@@ -52,6 +54,7 @@ export function DateInput(props: Props) {
             minimumDate={minimumDate}
             maximumDate={maximumDate}
             display="spinner"
+            textColor={theme.colors.foreground}
             onChange={(_: any, d?: Date) => {
               selectedDate = d;
             }}

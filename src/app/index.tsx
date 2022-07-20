@@ -1,26 +1,40 @@
 import React, {useMemo} from 'react';
 import {StatusBar} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {LandingScreen} from './screens/LandingScreen';
-import {MainScreen} from './screens/MainScreen';
-import {loadStore, useSelector} from './services/store';
 import {AppProvider, ThemeContext, defaultTheme, darkTheme} from '..';
+import {
+  NavigationContainer,
+  createNativeStackNavigator,
+  getScreen,
+} from './services/navigation';
+import {loadStore, useSelector} from './services/store';
+import './screens/LandingScreen';
+import './screens/MainScreen';
+import './screens/ProductsScreen';
+import './screens/ProductDetailsScreen';
 
 export default function App() {
   const Stack = useMemo(createNativeStackNavigator, []);
   const themeIndex = useSelector(s => s.settings.themeIndex);
   return (
-    <AppProvider asyncs={[loadStore]}>
-      <ThemeContext.Provider value={themeIndex ? darkTheme : defaultTheme}>
-        <StatusBar barStyle={themeIndex ? 'light-content' : 'dark-content'} />
+    <ThemeContext.Provider value={themeIndex ? darkTheme : defaultTheme}>
+      <AppProvider asyncs={[loadStore]}>
+        <StatusBar
+          barStyle={themeIndex ? 'light-content' : 'dark-content'}
+          translucent
+          backgroundColor="transparent"
+        />
         <NavigationContainer>
           <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="landing" component={LandingScreen} />
-            <Stack.Screen name="main" component={MainScreen} />
+            <Stack.Screen name="Landing" component={getScreen('Landing')} />
+            <Stack.Screen name="Main" component={getScreen('Main')} />
+            <Stack.Screen name="Products" component={getScreen('Products')} />
+            <Stack.Screen
+              name="ProductDetails"
+              component={getScreen('ProductDetails')}
+            />
           </Stack.Navigator>
         </NavigationContainer>
-      </ThemeContext.Provider>
-    </AppProvider>
+      </AppProvider>
+    </ThemeContext.Provider>
   );
 }

@@ -60,7 +60,7 @@ export function useSafeStyles(hasTabBar?: boolean) {
         bottomView: {
           padding: 24,
           paddingBottom: safeArea.bottom + 24,
-          backgroundColor: colors.white,
+          backgroundColor: colors.background,
         },
       }),
     [safeArea, hasTabBar, colors]

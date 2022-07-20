@@ -1,5 +1,6 @@
 import React from 'react';
 import {MainView} from '../components/MainView';
+import {navigate} from '../services/navigation';
 
 export function MainScreenPage3() {
   return (
@@ -10,6 +11,7 @@ export function MainScreenPage3() {
       title={'And Many More'}
       desc="We research technologies to solve problems"
       actionText="See All Technologies"
+      action={() => navigate('Products', {groupId: 'Technologies'})}
     />
   );
 }

@@ -29,14 +29,16 @@ export function createNavigator<T extends ParamListBase>() {
 
   const screens: any = {};
 
-  function createScreen<K extends KR>(key: K, screen: S<K>) {
-    screens[key] = screen;
+  function createScreen<K extends KR>(key: K, Screen: S<K>) {
+    screens[key] = function (p: any) {
+      return <Screen {...p.route?.params} />;
+    };
     if (__DEV__) {
       setTimeout(() => {
         nav?.setParams(nav.getCurrentRoute()?.params as any);
       }, 200);
     }
-    return screen;
+    return Screen;
   }
 
   function getScreen<K extends KR>(key: K): S<K> {

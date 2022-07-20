@@ -1,10 +1,9 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {navigate, createScreen} from '../services/navigation';
 import {colors} from '../../services/style';
 import {MainView} from '../components/MainView';
 
-export function LandingScreen() {
-  const nav = useNavigation();
+export default createScreen('Landing', () => {
   return (
     <MainView
       tint="#FFF"
@@ -15,7 +14,7 @@ export function LandingScreen() {
       topTitle={'Welcome to\n2359 Mobile SDK'}
       topDesc="The fastest way to build mobile applications"
       actionText="Start"
-      action={() => nav.navigate('main' as any)}
+      action={() => navigate('Main')}
     />
   );
-}
+});

@@ -1,5 +1,6 @@
 import React from 'react';
 import {MainView} from '../components/MainView';
+import {navigate} from '../services/navigation';
 
 export function MainScreenPage2() {
   return (
@@ -10,6 +11,7 @@ export function MainScreenPage2() {
       title={'Pre-defined Screens'}
       desc="Fill your content directly without layouting hassle"
       actionText="See All Screens"
+      action={() => navigate('Products', {groupId: 'Screens'})}
     />
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import {navigate} from '../services/navigation';
 import {MainView} from '../components/MainView';
 import {updateState, useSelector} from '../services/store';
 import {Tabs, createStyles} from '../..';
@@ -13,6 +14,7 @@ export function MainScreenPage1() {
       title={'Comes with\nCustomisable Components'}
       desc="Style it to your liking, consistent across platforms"
       actionText="See All Components"
+      action={() => navigate('Products', {groupId: 'Components'})}
       topContent={
         <View style={styles.topContentContainer}>
           <ThemeTabs />

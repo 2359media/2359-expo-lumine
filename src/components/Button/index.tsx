@@ -17,6 +17,7 @@ export interface ButtonProps extends ViewProps {
   secondary?: boolean;
   danger?: boolean;
   link?: boolean;
+  barItem?: boolean;
   small?: boolean;
   large?: boolean;
   rounded?: boolean;
@@ -30,6 +31,7 @@ export function Button(props: ButtonProps) {
     icon,
     sx,
     secondary,
+    barItem,
     link,
     small,
     large,
@@ -42,7 +44,11 @@ export function Button(props: ButtonProps) {
   } = props;
 
   const styles = useThemeStyles();
-  const type = (secondary && 'Secondary') || (link && 'Link') || 'Primary';
+  const type =
+    (secondary && 'Secondary') ||
+    (link && 'Link') ||
+    (barItem && 'BarItem') ||
+    'Primary';
 
   function getStyle(name: string, pressed: boolean, s: any, ps: any) {
     const anyStyles: any = styles;
@@ -126,6 +132,10 @@ const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
   containerSecondaryRounded: {
     borderRadius: 24,
   },
+  containerBarItem: {
+    minHeight: 40,
+    minWidth: 40,
+  },
   icon: {
     margin: 6,
   },
@@ -142,6 +152,15 @@ const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
     tintColor: colors.primaryD1,
   },
   iconSecondaryDisabled: {
+    tintColor: colors.disabledD1,
+  },
+  iconBarItem: {
+    tintColor: colors.primary,
+  },
+  iconBarItemPressed: {
+    tintColor: colors.primaryD1,
+  },
+  iconBarItemDisabled: {
     tintColor: colors.disabledD1,
   },
   text: {

@@ -49,7 +49,7 @@ export function PageView<T>(props: PageViewProps<T>) {
           {width > 0 &&
             props.data?.map((d, i) => (
               <View key={i} style={styles.page(width)}>
-                {props.renderItem?.(d, i)}
+                <Item index={i} data={d} renderItem={props.renderItem} />
               </View>
             ))}
         </Animated.ScrollView>
@@ -69,9 +69,14 @@ export function PageView<T>(props: PageViewProps<T>) {
   );
 }
 
+const Item = React.memo(
+  (props: any) => props.renderItem?.(props.data, props.index),
+  (p, n) => p.data === n.data
+);
+
 PageView.Footer = require('./Footer').default;
 
-export const styles = createStyles({
+const styles = createStyles({
   container: {
     flex: 1,
   },
