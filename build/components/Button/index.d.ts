@@ -13,6 +13,7 @@ export interface ButtonProps extends ViewProps {
     secondary?: boolean;
     danger?: boolean;
     link?: boolean;
+    barItem?: boolean;
     small?: boolean;
     large?: boolean;
     rounded?: boolean;

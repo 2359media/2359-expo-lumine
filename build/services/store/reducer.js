@@ -1,22 +1,10 @@
 import { persistReducer } from 'redux-persist';
 import storage from './storage';
+import { deepMerge } from './utils';
 export const actionTypes = {
     update: 'update',
     reset: 'reset',
 };
-function deepMerge(state, newState) {
-    if (state &&
-        newState &&
-        typeof newState == 'object' &&
-        !Array.isArray(newState)) {
-        const mergedState = { ...state };
-        Object.keys(newState).forEach(k => {
-            mergedState[k] = deepMerge(state[k], newState[k]);
-        });
-        return mergedState;
-    }
-    return newState;
-}
 export function createReducer(initialState) {
     const persistReducers = {};
     Object.keys(initialState).forEach(key => {

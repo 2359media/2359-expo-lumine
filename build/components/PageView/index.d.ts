@@ -8,12 +8,4 @@ export declare function PageView<T>(props: PageViewProps<T>): JSX.Element;
 export declare namespace PageView {
     var Footer: any;
 }
-export declare const styles: {
-    container: {
-        flex: number;
-    };
-    page: (w: number) => {
-        width: number;
-    };
-};
 export {};

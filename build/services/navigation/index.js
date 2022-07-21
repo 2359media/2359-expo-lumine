@@ -11,14 +11,16 @@ export function createNavigator() {
         return useNav();
     }
     const screens = {};
-    function createScreen(key, screen) {
-        screens[key] = screen;
+    function createScreen(key, Screen) {
+        screens[key] = function (p) {
+            return <Screen {...p.route?.params}/>;
+        };
         if (__DEV__) {
             setTimeout(() => {
                 nav?.setParams(nav.getCurrentRoute()?.params);
             }, 200);
         }
-        return screen;
+        return Screen;
     }
     function getScreen(key) {
         return screens[key] ?? NoScreen;

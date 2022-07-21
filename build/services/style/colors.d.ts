@@ -1,7 +1,11 @@
 export declare const colors: {
     transparent: string;
     /** #FFFFFF */ background: string;
+    /** #F8F8F8 */ backgroundD1: string;
+    /** #C2C9D1 */ backgroundD2: string;
     /** #000000 */ foreground: string;
+    /** #2D2D2D */ foregroundL1: string;
+    /** #4D4D4D */ foregroundL2: string;
     /** #804191 */ primary: string;
     /** #5F0B76 */ primaryD1: string;
     /** #804191 */ secondary: string;
@@ -12,6 +16,7 @@ export declare const colors: {
     /** #AAAAAA */ disabledD1: string;
     /** #000000 */ black: string;
     /** #FFFFFF */ white: string;
+    /** #F8F8F8 */ greyL4: string;
     /** #C2C9D1 */ greyL3: string;
     /** #AAAAAA */ greyL2: string;
     /** #757575 */ greyL1: string;

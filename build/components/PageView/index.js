@@ -20,21 +20,22 @@ export function PageView(props) {
         <Animated.ScrollView bounces={false} horizontal pagingEnabled showsHorizontalScrollIndicator={false} onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: offsetA } } }], { useNativeDriver: true })}>
           {width > 0 &&
             props.data?.map((d, i) => (<View key={i} style={styles.page(width)}>
-                {props.renderItem?.(d, i)}
+                <Item index={i} data={d} renderItem={props.renderItem}/>
               </View>))}
         </Animated.ScrollView>
         <Indicator indexA={indexA} numberOfPages={props.data?.length ?? 0} style={{
             position: 'absolute',
             top: footerFrame ? footerFrame.y - 24 : undefined,
-            left: 0,
-            right: 0,
+            left: footerFrame ? footerFrame?.x % width : 0,
+            width: footerFrame?.width ?? '100%',
             bottom: footerFrame ? undefined : 0,
         }}/>
       </View>
     </Context.Provider>);
 }
+const Item = React.memo((props) => props.renderItem?.(props.data, props.index), (p, n) => p.data === n.data);
 PageView.Footer = require('./Footer').default;
-export const styles = createStyles({
+const styles = createStyles({
     container: {
         flex: 1,
     },

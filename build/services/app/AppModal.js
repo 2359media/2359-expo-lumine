@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Modal, StatusBar, Pressable, Keyboard } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, interpolate, withTiming, runOnJS, } from 'react-native-reanimated';
-import { absoluteFillObject, colors, createStyles, withOpacity, } from '../../services/style';
+import { absoluteFillObject, createThemeStyles, withOpacity, } from '../../services/style';
 let addModals = [];
 export function showModal(component, config) {
     Keyboard.dismiss();
@@ -13,6 +13,7 @@ export function AppModal() {
     const opacity = useSharedValue(0);
     const props = state.length > 0 ? state[0] : undefined;
     const isCenter = props?.position == 'center';
+    const styles = useThemeStyles();
     const containerStyle = useAnimatedStyle(() => ({
         opacity: opacity.value,
     }));
@@ -58,16 +59,16 @@ export function AppModal() {
       </Modal>), [props]);
     return render;
 }
-const styles = createStyles({
+const useThemeStyles = createThemeStyles(({ colors }) => ({
     container: {
         flex: 1,
     },
     background: {
         ...absoluteFillObject,
-        backgroundColor: withOpacity(colors.black, 0.5),
+        backgroundColor: withOpacity(colors.foreground, 0.2),
     },
     content: (isCenter) => ({
         flex: 1,
         justifyContent: isCenter ? 'center' : 'flex-end',
     }),
-});
+}));

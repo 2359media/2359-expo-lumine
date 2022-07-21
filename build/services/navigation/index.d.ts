@@ -6,7 +6,7 @@ export declare function createNavigator<T extends ParamListBase>(): {
     useNavigation: () => NativeStackNavigationProp<T, string, undefined>;
     goBack: () => void;
     NavigationContainer: (props: NavigationContainerProps) => JSX.Element;
-    createScreen: <K_1 extends keyof T>(key: K_1, screen: (props: (T[K_1] extends undefined ? {} : T[K_1]) & {
+    createScreen: <K_1 extends keyof T>(key: K_1, Screen: (props: (T[K_1] extends undefined ? {} : T[K_1]) & {
         children?: any;
     }) => any) => (props: (T[K_1] extends undefined ? {} : T[K_1]) & {
         children?: any;

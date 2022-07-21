@@ -10,7 +10,10 @@ export function createStore(props) {
     const getState = store.getState;
     const subscribe = store.subscribe;
     function updateState(newState) {
-        store.dispatch({ type: actionTypes.update, payload: newState });
+        store.dispatch({
+            type: actionTypes.update,
+            payload: typeof newState == 'function' ? newState(store.getState()) : newState,
+        });
     }
     function resetStateExcept(keys) {
         const resetState = { ...props.initialState };

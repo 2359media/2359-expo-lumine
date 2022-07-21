@@ -3,9 +3,12 @@ import { Text, Image, Pressable } from 'react-native';
 import { createThemeStyles } from '../../services/style';
 const hitSlop = { bottom: 8, top: 8, right: 8, left: 8 };
 export function Button(props) {
-    const { text, icon, sx, secondary, link, small, large, rounded, disabled, style, children, onPress, ...rest } = props;
+    const { text, icon, sx, secondary, barItem, link, small, large, rounded, disabled, style, children, onPress, ...rest } = props;
     const styles = useThemeStyles();
-    const type = (secondary && 'Secondary') || (link && 'Link') || 'Primary';
+    const type = (secondary && 'Secondary') ||
+        (link && 'Link') ||
+        (barItem && 'BarItem') ||
+        'Primary';
     function getStyle(name, pressed, s, ps) {
         const anyStyles = styles;
         return [
@@ -66,6 +69,10 @@ const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
     containerSecondaryRounded: {
         borderRadius: 24,
     },
+    containerBarItem: {
+        minHeight: 40,
+        minWidth: 40,
+    },
     icon: {
         margin: 6,
     },
@@ -84,13 +91,22 @@ const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
     iconSecondaryDisabled: {
         tintColor: colors.disabledD1,
     },
+    iconBarItem: {
+        tintColor: colors.primary,
+    },
+    iconBarItemPressed: {
+        tintColor: colors.primaryD1,
+    },
+    iconBarItemDisabled: {
+        tintColor: colors.disabledD1,
+    },
     text: {
         margin: 6,
         fontFamily: fonts.primary600,
         fontSize: 16,
     },
     textPrimary: {
-        color: colors.white,
+        color: colors.background,
     },
     textPrimaryDisabled: {
         color: colors.disabledD1,
@@ -114,12 +130,10 @@ const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
         color: colors.disabledD1,
     },
     textLinkSmall: {
-        color: colors.primary,
         fontSize: 14,
     },
     textLinkLarge: {
         fontFamily: fonts.primary700,
-        color: colors.primary,
         fontSize: 20,
     },
 }));

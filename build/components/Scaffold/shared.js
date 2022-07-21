@@ -1,8 +1,9 @@
-import { useMemo } from 'react';
+import { useMemo, useContext } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, createStyles } from '../../services/style';
+import { createStyles, ThemeContext } from '../../services/style';
 export function useSafeStyles(hasTabBar) {
     const safeArea = useSafeAreaInsets();
+    const { colors } = useContext(ThemeContext);
     return useMemo(() => createStyles({
         container: {
             flex: 1,
@@ -18,7 +19,7 @@ export function useSafeStyles(hasTabBar) {
             flexGrow: 1,
         },
         content: {
-            padding: 16,
+            padding: 24,
         },
         contentFull: {
             flex: 1,
@@ -40,9 +41,9 @@ export function useSafeStyles(hasTabBar) {
             paddingTop: safeArea.top + 32,
         },
         bottomView: {
-            padding: 16,
-            paddingBottom: safeArea.bottom + 16,
-            backgroundColor: colors.white,
+            padding: 24,
+            paddingBottom: safeArea.bottom + 24,
+            backgroundColor: colors.background,
         },
-    }), [safeArea, hasTabBar]);
+    }), [safeArea, hasTabBar, colors]);
 }

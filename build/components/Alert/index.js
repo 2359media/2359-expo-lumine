@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { showModal } from '../../services/app';
-import { colors, fonts, createThemeStyles } from '../../services/style';
+import { createThemeStyles } from '../../services/style';
 import { Button } from '../Button';
 const defaultButtons = [{ text: 'Dismiss' }];
 export function showAlert(title, message, buttons) {
@@ -25,7 +25,7 @@ function Alert(props) {
       </View>
     </View>);
 }
-const useThemeStyles = createThemeStyles(() => ({
+const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
     container: {
         alignSelf: 'center',
         width: 320,

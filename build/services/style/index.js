@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { ThemeContext } from './theme';
 export function createStyles(styles) {
@@ -8,10 +8,13 @@ export function createThemeStyles(fn) {
     const cacheStyles = {};
     return function useThemeStyles() {
         const theme = useContext(ThemeContext);
-        if (!cacheStyles[theme.key]) {
-            cacheStyles[theme.key] = fn(theme);
-        }
-        return cacheStyles[theme.key];
+        const key = theme.key;
+        return useMemo(() => {
+            if (!cacheStyles[key]) {
+                cacheStyles[key] = fn(theme);
+            }
+            return cacheStyles[key];
+        }, [key]);
     };
 }
 export const absoluteFillObject = StyleSheet.absoluteFillObject;
