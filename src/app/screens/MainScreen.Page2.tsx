@@ -5,7 +5,7 @@ import {navigate} from '../services/navigation';
 export function MainScreenPage2() {
   return (
     <MainView
-      topImage={require('../services/res/mainBg2.png')}
+      topImage={require('../../../assets/bgMain2.png')}
       tint="#41A92A"
       tintD1="#41A92ADD"
       title={'Pre-defined Screens'}

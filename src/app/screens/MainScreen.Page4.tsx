@@ -8,7 +8,7 @@ export function MainScreenPage4() {
       tint="#FFF"
       tintD1="#FFFD"
       backgroundTint={colors.primary}
-      coverImage={require('../services/res/landingBg.png')}
+      coverImage={require('../../../assets/bgLanding.png')}
       topTitle="Visit Us"
       topDesc="At 2359.co or contact us to learn more"
       actionText="Contact Us"

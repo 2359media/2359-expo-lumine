@@ -8,7 +8,7 @@ import {Tabs, createStyles} from '../..';
 export function MainScreenPage1() {
   return (
     <MainView
-      topImage={require('../services/res/mainBg1.png')}
+      topImage={require('../../../assets/bgMain1.png')}
       tint="#5AAEE1"
       tintD1="#479ACD"
       title={'Comes with\nCustomisable Components'}
