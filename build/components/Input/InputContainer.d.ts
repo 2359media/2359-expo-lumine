@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { ViewProps } from 'react-native';
-import { SharedValue } from 'react-native-reanimated';
+import { SharedValue } from '../../../modules/reanimated';
 export interface InputProps<T> {
     title?: string;
     placeholder?: string;

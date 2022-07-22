@@ -1,5 +1,4 @@
-import Storage from '@react-native-async-storage/async-storage';
-import * as SecureStorage from 'expo-secure-store';
+import m from '../../../modules';
 import {getEnv} from '../env';
 
 const isMockStorage = () => getEnv() == 'dev';
@@ -10,8 +9,8 @@ function setItem(persistKey: string, value: any) {
     return Promise.reject();
   }
   return key.endsWith('secure')
-    ? SecureStorage.setItemAsync(key, value)
-    : Storage.setItem(key, value);
+    ? m.SecureStorage.setItemAsync(key, value)
+    : m.Storage.setItem(key, value);
 }
 
 function getItem(persistKey: string) {
@@ -20,8 +19,8 @@ function getItem(persistKey: string) {
     return Promise.reject();
   }
   return key.endsWith('secure')
-    ? SecureStorage.getItemAsync(key)
-    : Storage.getItem(key);
+    ? m.SecureStorage.getItemAsync(key)
+    : m.Storage.getItem(key);
 }
 
 function removeItem(persistKey: string) {
@@ -30,8 +29,8 @@ function removeItem(persistKey: string) {
     return Promise.reject();
   }
   return key.endsWith('secure')
-    ? SecureStorage.deleteItemAsync(key)
-    : Storage.removeItem(key);
+    ? m.SecureStorage.deleteItemAsync(key)
+    : m.Storage.removeItem(key);
 }
 
 export default {setItem, getItem, removeItem};

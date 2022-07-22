@@ -5,7 +5,7 @@ import {
   TextInputProps as RNTIP,
   Image,
 } from 'react-native';
-import {useSharedValue} from 'react-native-reanimated';
+import r from '../../../modules/reanimated';
 import {InputContainer, InputProps} from '../Input';
 
 const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
@@ -14,7 +14,7 @@ export interface TextInputProps extends InputProps<string>, RNTIP {}
 
 export function TextInput(props: TextInputProps) {
   const tiRef = useRef<RNTI>(null);
-  const focus = useSharedValue(false);
+  const focus = r.useSharedValue(false);
   const [secure, setSecure] = useState(props.secureTextEntry);
 
   useEffect(() => {

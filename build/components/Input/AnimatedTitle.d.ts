@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { TextProps } from 'react-native';
-import { SharedValue } from 'react-native-reanimated';
+import { SharedValue } from '../../../modules/reanimated';
 interface AnimatedTitleProps extends TextProps {
     focus?: SharedValue<boolean>;
     forceOnTop?: boolean;

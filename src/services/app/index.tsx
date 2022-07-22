@@ -1,6 +1,6 @@
 import React from 'react';
 import {ViewProps} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import m from '../../../modules';
 import {loadFonts} from '../style';
 import {AppLoading} from './AppLoading';
 import {AppModal} from './AppModal';
@@ -18,10 +18,10 @@ export function AppProvider(props: Props) {
       SplashView={props.SplashView}
       asyncs={[checkForUpdate, loadFonts, ...otherAsyncs]}
     >
-      <SafeAreaProvider style={{flex: 1}}>
+      <m.SafeArea.SafeAreaProvider>
         {props.children}
         <AppModal />
-      </SafeAreaProvider>
+      </m.SafeArea.SafeAreaProvider>
     </AppLoading>
   );
 }

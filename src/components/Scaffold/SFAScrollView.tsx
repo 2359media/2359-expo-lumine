@@ -2,17 +2,13 @@ import React, {forwardRef} from 'react';
 import {useRef} from 'react';
 import {View, ScrollView, Pressable, Platform} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import Animated, {
-  interpolate,
-  runOnJS,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated';
+import r from '../../../modules/reanimated';
 import {useSafeStyles, Props} from './shared';
 
-const AnimatedKASV = Animated.createAnimatedComponent(KeyboardAwareScrollView);
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+const AnimatedKASV = r.Animated.createAnimatedComponent(
+  KeyboardAwareScrollView
+);
+const AnimatedPressable = r.Animated.createAnimatedComponent(Pressable);
 
 export const SFAScrollView = forwardRef<ScrollView, Props>((props, ref) => {
   const {
@@ -30,38 +26,38 @@ export const SFAScrollView = forwardRef<ScrollView, Props>((props, ref) => {
     refreshControl,
     ...rest
   } = props;
-  const Comp = keyboardAware ? AnimatedKASV : Animated.ScrollView;
+  const Comp = keyboardAware ? AnimatedKASV : r.Animated.ScrollView;
   const styles = useSafeStyles(hasTabBar || !!bottomView);
   const scrollRef = useRef<ScrollView>();
-  const offset = useSharedValue(0);
-  const h = useSharedValue(100);
-  const pulldownStyle = useAnimatedStyle(() => ({
+  const offset = r.useSharedValue(0);
+  const h = r.useSharedValue(100);
+  const pulldownStyle = r.useAnimatedStyle(() => ({
     transform: [
       {
-        translateY: interpolate(
+        translateY: r.interpolate(
           offset.value,
           [-1, 0, 1, 2].map(x => h.value + x),
           [-60, -60, 0, 0]
         ),
       },
     ],
-    opacity: interpolate(
+    opacity: r.interpolate(
       offset.value,
       [-1, 0, 50, 51].map(x => h.value + x),
       [0, 0, 1, 1]
     ),
   }));
-  const topNavStyle = useAnimatedStyle(() => ({
+  const topNavStyle = r.useAnimatedStyle(() => ({
     zIndex: 100,
     transform: [{translateY: Math.min(offset.value, 0)}],
   }));
-  const progressStyle = useAnimatedStyle(() => ({
+  const progressStyle = r.useAnimatedStyle(() => ({
     marginTop: h.value + styles.top.paddingTop,
     marginBottom: -(h.value + styles.top.paddingTop),
   }));
-  const scrollHandler = useAnimatedScrollHandler(e => {
+  const scrollHandler = r.useAnimatedScrollHandler(e => {
     offset.value = e.contentOffset.y;
-    onScroll && runOnJS(onScroll)({nativeEvent: e} as any);
+    onScroll && r.runOnJS(onScroll)({nativeEvent: e} as any);
   });
 
   return (
@@ -85,19 +81,19 @@ export const SFAScrollView = forwardRef<ScrollView, Props>((props, ref) => {
         stickyHeaderIndices={[2]}
         refreshControl={Platform.select({
           ios: refreshControl && (
-            <Animated.View style={progressStyle}>
+            <r.Animated.View style={progressStyle}>
               {refreshControl}
-            </Animated.View>
+            </r.Animated.View>
           ),
           android: refreshControl,
         })}
       >
-        <Animated.View
+        <r.Animated.View
           style={topNavStyle}
           onLayout={e => (h.value = e.nativeEvent.layout.height)}
         >
           {topHero}
-        </Animated.View>
+        </r.Animated.View>
         {topView || <React.Fragment />}
         {topStickyView ? (
           <View style={styles.topStickyView} pointerEvents="box-none">

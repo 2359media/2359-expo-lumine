@@ -28,7 +28,7 @@ export declare const useThemeStyles: () => {
         position: "absolute";
         left: number;
         right: number;
-        fontFamily: string;
+        fontFamily: string | undefined;
         color: string;
     };
     value: {
@@ -37,7 +37,7 @@ export declare const useThemeStyles: () => {
         marginRight: number;
         paddingTop: number;
         paddingBottom: number;
-        fontFamily: string;
+        fontFamily: string | undefined;
         color: string;
     };
     valueLine: {
@@ -60,7 +60,7 @@ export declare const useThemeStyles: () => {
     error: {
         marginVertical: number;
         marginHorizontal: number;
-        fontFamily: string;
+        fontFamily: string | undefined;
         fontSize: number;
         color: string;
     };

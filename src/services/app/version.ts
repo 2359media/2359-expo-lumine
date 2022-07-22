@@ -1,3 +1,3 @@
-import {nativeApplicationVersion, nativeBuildVersion} from 'expo-application';
+import m from '../../../modules';
 
-export const versionString = `${nativeApplicationVersion} (${nativeBuildVersion})`;
+export const versionString = `${m.Application.nativeApplicationVersion} (${m.Application.nativeBuildVersion})`;

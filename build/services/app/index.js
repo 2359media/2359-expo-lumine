@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import m from '../../../modules';
 import { loadFonts } from '../style';
 import { AppLoading } from './AppLoading';
 import { AppModal } from './AppModal';
@@ -7,10 +7,10 @@ import { checkForUpdate } from './checkForUpdate';
 export function AppProvider(props) {
     const otherAsyncs = props.asyncs ?? [];
     return (<AppLoading SplashView={props.SplashView} asyncs={[checkForUpdate, loadFonts, ...otherAsyncs]}>
-      <SafeAreaProvider style={{ flex: 1 }}>
+      <m.SafeArea.SafeAreaProvider>
         {props.children}
         <AppModal />
-      </SafeAreaProvider>
+      </m.SafeArea.SafeAreaProvider>
     </AppLoading>);
 }
 export * from './AppModal';

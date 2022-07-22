@@ -1,16 +1,12 @@
-import { loadAsync } from 'expo-font';
-function getDefaultFonts() {
-    return {
-        OpenSans_400Regular: require('@expo-google-fonts/open-sans/OpenSans_400Regular.ttf'),
-        OpenSans_600SemiBold: require('@expo-google-fonts/open-sans/OpenSans_600SemiBold.ttf'),
-        OpenSans_700Bold: require('@expo-google-fonts/open-sans/OpenSans_700Bold.ttf'),
-    };
-}
+import m from '../../../modules';
 export async function loadFonts() {
-    await loadAsync(getDefaultFonts());
+    await m.Font.loadAsync({
+        OpenSans_400Regular: m.Font.OpenSans_400Regular,
+        OpenSans_600SemiBold: m.Font.OpenSans_600SemiBold,
+        OpenSans_700Bold: m.Font.OpenSans_700Bold,
+    });
+    fonts.primary400 = 'OpenSans_400Regular';
+    fonts.primary600 = 'OpenSans_600SemiBold';
+    fonts.primary700 = 'OpenSans_700Bold';
 }
-export const fonts = {
-    /** regular */ primary400: 'OpenSans_400Regular',
-    /** medium */ primary600: 'OpenSans_600SemiBold',
-    /** bold */ primary700: 'OpenSans_700Bold',
-};
+export const fonts = {};

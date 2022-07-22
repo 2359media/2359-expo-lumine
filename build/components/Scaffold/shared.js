@@ -1,8 +1,8 @@
 import { useMemo, useContext } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import m from '../../../modules';
 import { createStyles, ThemeContext } from '../../services/style';
 export function useSafeStyles(hasTabBar) {
-    const safeArea = useSafeAreaInsets();
+    const safeArea = m.SafeArea.useSafeAreaInsets();
     const { colors } = useContext(ThemeContext);
     return useMemo(() => createStyles({
         container: {

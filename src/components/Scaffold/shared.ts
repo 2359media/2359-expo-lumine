@@ -1,6 +1,6 @@
 import {useMemo, useContext} from 'react';
 import {ScrollViewProps} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import m from '../../../modules';
 import {createStyles, ThemeContext} from '../../services/style';
 
 export interface Props extends ScrollViewProps {
@@ -17,7 +17,7 @@ export interface Props extends ScrollViewProps {
 }
 
 export function useSafeStyles(hasTabBar?: boolean) {
-  const safeArea = useSafeAreaInsets();
+  const safeArea = m.SafeArea.useSafeAreaInsets();
   const {colors} = useContext(ThemeContext);
   return useMemo(
     () =>

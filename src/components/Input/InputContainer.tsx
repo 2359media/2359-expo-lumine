@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Pressable, ViewProps} from 'react-native';
-import {SharedValue} from 'react-native-reanimated';
+import {SharedValue} from '../../../modules/reanimated';
 import {AnimatedTitle} from './AnimatedTitle';
 import {useThemeStyles} from './styles';
 

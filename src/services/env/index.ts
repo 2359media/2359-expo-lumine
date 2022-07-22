@@ -1,9 +1,8 @@
-import Constants from 'expo-constants';
-import Storage from '@react-native-async-storage/async-storage';
+import m from '../../../modules';
 
 export type Env = 'dev' | 'staging' | 'prod' | 'default';
 
-let currentEnv: Env = Constants.manifest?.extra?.env ?? 'dev';
+let currentEnv: Env = m.Constants.manifest?.extra?.env ?? 'dev';
 
 export function selectEnv<T>(envs: Partial<{[key in Env]: T}>) {
   return (envs[currentEnv] ?? envs.default) as T;
@@ -13,10 +12,10 @@ export function setEnv(env?: Env) {
   console.log('Env: ' + env);
   if (env) {
     currentEnv = env;
-    Storage.setItem('env', env);
+    m.Storage.setItem('env', env);
   } else {
-    currentEnv = Constants.manifest?.extra?.env ?? 'dev';
-    Storage.removeItem('env');
+    currentEnv = m.Constants.manifest?.extra?.env ?? 'dev';
+    m.Storage.removeItem('env');
   }
 }
 
@@ -26,7 +25,7 @@ export function getEnv() {
 
 export async function loadEnv() {
   try {
-    const env = await Storage.getItem('env');
+    const env = await m.Storage.getItem('env');
     if (env) {
       currentEnv = env as Env;
     }
