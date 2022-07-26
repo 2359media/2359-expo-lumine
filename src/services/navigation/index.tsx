@@ -1,6 +1,6 @@
+import {useContext} from 'react';
 import {
   NavigationContainerRef,
-  NavigationContainerProps,
   useNavigation as useNav,
   NavigationContainer as NC,
   ParamListBase,
@@ -11,6 +11,7 @@ import {
 } from '@react-navigation/native-stack';
 import {createBottomTabNavigator as CBTN} from '@react-navigation/bottom-tabs';
 import {Text, View} from 'react-native';
+import {ThemeContext} from '../style';
 
 export function createNavigator<T extends ParamListBase>() {
   type KR = keyof T; //key routes
@@ -19,9 +20,10 @@ export function createNavigator<T extends ParamListBase>() {
 
   let nav: NavigationContainerRef<T> | null;
 
-  function NavigationContainer(props: NavigationContainerProps) {
-    return <NC<T> ref={r => (nav = r)} {...props} />;
-  }
+  const NavigationContainer: typeof NC<T> = props => {
+    const theme = useContext(ThemeContext);
+    return <NC<T> ref={r => (nav = r)} theme={theme} {...props} />;
+  };
 
   function useNavigation() {
     return useNav<NativeStackNavigationProp<T>>();

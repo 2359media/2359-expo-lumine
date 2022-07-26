@@ -22,6 +22,12 @@ export const colors = {
   /** #757575 */ greyL1: '#757575',
   /** #4D4D4D */ grey: '#4D4D4D',
   /** #2D2D2D */ greyD1: '#2D2D2D',
+
+  // for react navigation
+  /** #000000 */ text: '#000000',
+  /** #000000 */ card: '#FFFFFF',
+  /** #2D2D2D */ border: '#F8F8F8',
+  /** #E4100E */ notification: '#E4100E',
 };
 
 export function withOpacity(color: string, opacity: number): string {

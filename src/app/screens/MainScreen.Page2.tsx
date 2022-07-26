@@ -10,7 +10,7 @@ export function MainScreenPage2() {
       tintD1="#41A92ADD"
       title={'Pre-defined Screens'}
       desc="Fill your content directly without layouting hassle"
-      actionText="See All Screens"
+      actionText="See Demo"
       action={() => navigate('Products', {groupId: 'Screens'})}
     />
   );

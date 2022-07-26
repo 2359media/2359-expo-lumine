@@ -66,7 +66,7 @@ export function MainView(props: MainViewProps) {
             {props.topImage && (
               <Image
                 style={styles.topImage}
-                resizeMode="cover"
+                resizeMode="contain"
                 source={props.topImage}
               />
             )}
@@ -122,6 +122,7 @@ const styles = createStyles({
   contentContainer: {
     paddingTop: 48,
     paddingBottom: 24,
+    overflow: 'hidden',
   },
   coverImage: {
     position: 'absolute',
@@ -136,10 +137,9 @@ const styles = createStyles({
     width: undefined,
     height: undefined,
     top: 0,
-    left: 0,
-    right: 0,
+    left: -12,
+    right: -12,
     bottom: 0,
-    overflow: 'visible',
   },
   topTitle: {
     fontSize: 40,

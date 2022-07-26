@@ -10,7 +10,7 @@ export function MainScreenPage3() {
       tintD1="#F0BA0BDD"
       title={'And Many More'}
       desc="We research technologies to solve problems"
-      actionText="See All Technologies"
+      actionText="See Demo"
       action={() => navigate('Products', {groupId: 'Technologies'})}
     />
   );

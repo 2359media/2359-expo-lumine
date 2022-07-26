@@ -16,8 +16,9 @@ export {Product, addProduct} from './services/product';
 export default function App() {
   const Stack = useMemo(createNativeStackNavigator, []);
   const themeIndex = useSelector(s => s.settings.themeIndex);
+  const theme = themeIndex ? darkTheme : defaultTheme;
   return (
-    <ThemeContext.Provider value={themeIndex ? darkTheme : defaultTheme}>
+    <ThemeContext.Provider value={theme}>
       <AppProvider asyncs={[loadStore]}>
         <StatusBar
           barStyle={themeIndex ? 'light-content' : 'dark-content'}
