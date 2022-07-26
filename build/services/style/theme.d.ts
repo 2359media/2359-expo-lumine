@@ -2,6 +2,7 @@
 import { colors } from './colors';
 import { fonts } from './fonts';
 export interface Theme {
+    dark: boolean;
     key: string;
     fonts: typeof fonts;
     colors: typeof colors;

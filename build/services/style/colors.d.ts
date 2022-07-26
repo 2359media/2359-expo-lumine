@@ -22,5 +22,9 @@ export declare const colors: {
     /** #757575 */ greyL1: string;
     /** #4D4D4D */ grey: string;
     /** #2D2D2D */ greyD1: string;
+    /** #000000 */ text: string;
+    /** #000000 */ card: string;
+    /** #2D2D2D */ border: string;
+    /** #E4100E */ notification: string;
 };
 export declare function withOpacity(color: string, opacity: number): string;

@@ -1,6 +1,3 @@
-import * as Animated from 'react-native-reanimated';
-export type * from 'react-native-reanimated';
-
 interface Modules {
   Font: {
     loadAsync(fonts: any): Promise;
@@ -52,7 +49,6 @@ interface Modules {
     };
     SafeAreaProvider(props: {children: any}): any;
   };
-  Animated: typeof Animated;
 }
 
 declare const modules: Modules;

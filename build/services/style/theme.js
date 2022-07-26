@@ -2,12 +2,14 @@ import { createContext } from 'react';
 import { colors } from './colors';
 import { fonts } from './fonts';
 export const defaultTheme = {
+    dark: false,
     key: 'default',
     fonts,
     colors,
 };
 export const darkTheme = {
     ...defaultTheme,
+    dark: true,
     key: 'dark',
     colors: {
         ...defaultTheme.colors,
@@ -17,6 +19,9 @@ export const darkTheme = {
         foreground: colors.background,
         foregroundL1: colors.backgroundD1,
         foregroundL2: colors.backgroundD2,
+        text: colors.background,
+        border: colors.foregroundL1,
+        card: colors.foreground,
     },
 };
 export const ThemeContext = createContext(defaultTheme);

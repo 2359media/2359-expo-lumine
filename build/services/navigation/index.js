@@ -1,12 +1,15 @@
+import { useContext } from 'react';
 import { useNavigation as useNav, NavigationContainer as NC, } from '@react-navigation/native';
 import { createNativeStackNavigator as CNSN, } from '@react-navigation/native-stack';
 import { createBottomTabNavigator as CBTN } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
+import { ThemeContext } from '../style';
 export function createNavigator() {
     let nav;
-    function NavigationContainer(props) {
-        return <NC ref={r => (nav = r)} {...props}/>;
-    }
+    const NavigationContainer = props => {
+        const theme = useContext(ThemeContext);
+        return <NC ref={r => (nav = r)} theme={theme} {...props}/>;
+    };
     function useNavigation() {
         return useNav();
     }

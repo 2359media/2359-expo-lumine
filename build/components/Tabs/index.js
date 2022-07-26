@@ -21,6 +21,7 @@ const useThemeStyles = createThemeStyles(({ colors }) => ({
         marginHorizontal: 2,
         minHeight: 36,
         backgroundColor: selected ? colors.primary : colors.background,
+        paddingHorizontal: 4,
     }),
     text: (selected) => ({
         fontSize: 14,

@@ -1,11 +1,19 @@
 /// <reference types="react" />
-import { NavigationContainerProps, ParamListBase } from '@react-navigation/native';
+import { NavigationContainerRef, ParamListBase } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export declare function createNavigator<T extends ParamListBase>(): {
     navigate: <K extends keyof T>(...args: T[K] extends object ? [K, T[K]] : [K]) => void;
     useNavigation: () => NativeStackNavigationProp<T, string, undefined>;
     goBack: () => void;
-    NavigationContainer: (props: NavigationContainerProps) => JSX.Element;
+    NavigationContainer: (props: import("@react-navigation/native").NavigationContainerProps & {
+        theme?: import("@react-navigation/native").Theme | undefined;
+        linking?: import("@react-navigation/native").LinkingOptions<T> | undefined;
+        fallback?: import("react").ReactNode;
+        documentTitle?: import("@react-navigation/native").DocumentTitleOptions | undefined;
+        onReady?: (() => void) | undefined;
+    } & {
+        ref?: import("react").Ref<NavigationContainerRef<T>> | undefined;
+    }) => import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>;
     createScreen: <K_1 extends keyof T>(key: K_1, Screen: (props: (T[K_1] extends undefined ? {} : T[K_1]) & {
         children?: any;
     }) => any) => (props: (T[K_1] extends undefined ? {} : T[K_1]) & {
