@@ -13,3 +13,4 @@ export * from './services/env';
 export * from './services/navigation';
 export * from './services/store';
 export * from './services/style';
+export { registerModules } from '../modules';

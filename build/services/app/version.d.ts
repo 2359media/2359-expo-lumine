@@ -1,1 +1,1 @@
-export declare const versionString: string;
+export declare function getVersionString(): string;

@@ -1,2 +1,5 @@
 import m from '../../../modules';
-export const versionString = `${m.Application.nativeApplicationVersion} (${m.Application.nativeBuildVersion})`;
+export function getVersionString() {
+    const { nativeApplicationVersion, nativeBuildVersion } = m.Application;
+    return `${nativeApplicationVersion} (${nativeBuildVersion})`;
+}

@@ -2,7 +2,7 @@ import m from '../../../modules';
 
 export type Env = 'dev' | 'staging' | 'prod' | 'default';
 
-let currentEnv: Env = m.Constants.manifest?.extra?.env ?? 'dev';
+let currentEnv: Env;
 
 export function selectEnv<T>(envs: Partial<{[key in Env]: T}>) {
   return (envs[currentEnv] ?? envs.default) as T;
@@ -20,6 +20,9 @@ export function setEnv(env?: Env) {
 }
 
 export function getEnv() {
+  if (!currentEnv) {
+    currentEnv = m.Constants.manifest?.extra?.env ?? 'dev';
+  }
   return currentEnv;
 }
 

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import m from '../../../modules';
 import AppSplash from './AppSplash';
 import {createStyles} from '../style';
-import {versionString} from './version';
+import {getVersionString} from './version';
 
 interface Props {
   asyncs: ((updateText: (t: string) => void) => Promise<any>)[];
@@ -27,7 +27,7 @@ export function AppLoading({asyncs, children, SplashView}: Props) {
   return (
     <View style={styles.container}>
       <AppSplash done={done}>
-        {SplashView && <SplashView text={`${versionString}\n${text}`} />}
+        {SplashView && <SplashView text={`${getVersionString()}\n${text}`} />}
       </AppSplash>
       {done && children}
     </View>

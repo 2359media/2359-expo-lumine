@@ -1,12 +1,12 @@
 import m from '../../../modules';
 export async function loadFonts() {
     await m.Font.loadAsync({
-        OpenSans_400Regular: m.Font.OpenSans_400Regular,
-        OpenSans_600SemiBold: m.Font.OpenSans_600SemiBold,
-        OpenSans_700Bold: m.Font.OpenSans_700Bold,
+        ...m.Font400Regular,
+        ...m.Font600SemiBold,
+        ...m.Font700Bold,
     });
-    fonts.primary400 = 'OpenSans_400Regular';
-    fonts.primary600 = 'OpenSans_600SemiBold';
-    fonts.primary700 = 'OpenSans_700Bold';
+    fonts.primary400 = Object.keys(m.Font400Regular)[0];
+    fonts.primary600 = Object.keys(m.Font600SemiBold)[0];
+    fonts.primary700 = Object.keys(m.Font700Bold)[0];
 }
 export const fonts = {};

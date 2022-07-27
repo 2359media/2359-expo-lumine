@@ -1,5 +1,5 @@
 import m from '../../../modules';
-let currentEnv = m.Constants.manifest?.extra?.env ?? 'dev';
+let currentEnv;
 export function selectEnv(envs) {
     return (envs[currentEnv] ?? envs.default);
 }
@@ -15,6 +15,9 @@ export function setEnv(env) {
     }
 }
 export function getEnv() {
+    if (!currentEnv) {
+        currentEnv = m.Constants.manifest?.extra?.env ?? 'dev';
+    }
     return currentEnv;
 }
 export async function loadEnv() {
