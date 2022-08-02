@@ -1,6 +1,6 @@
 {
   "name": "lumine",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "dependencies": {
@@ -46,7 +46,9 @@
     "@types/react": "17.0.30"
   },
   "files": [
-    "build"
+    "build",
+    "icons",
+    "modules"
   ],
   "nodemonConfig": {
     "ignore": [
