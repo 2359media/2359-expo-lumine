@@ -3,9 +3,11 @@ export declare const colors: {
     /** #FFFFFF */ background: string;
     /** #F8F8F8 */ backgroundD1: string;
     /** #C2C9D1 */ backgroundD2: string;
+    /** #AAAAAA */ backgroundD3: string;
     /** #000000 */ foreground: string;
     /** #2D2D2D */ foregroundL1: string;
     /** #4D4D4D */ foregroundL2: string;
+    /** #757575 */ foregroundL3: string;
     /** #804191 */ primary: string;
     /** #5F0B76 */ primaryD1: string;
     /** #804191 */ secondary: string;
@@ -28,3 +30,4 @@ export declare const colors: {
     /** #E4100E */ notification: string;
 };
 export declare function withOpacity(color: string, opacity: number): string;
+export declare function lightenDarkenColor(col: string, amt: number): string;

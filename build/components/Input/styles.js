@@ -12,14 +12,14 @@ export const useThemeStyles = createThemeStyles(({ fonts, colors }) => ({
         paddingTop: 20,
         paddingBottom: 4,
         borderBottomWidth: 1,
-        borderColor: colors.greyL1,
+        borderColor: colors.foregroundL3,
     },
     borderRounded: {
         paddingTop: 14,
         paddingBottom: 14,
         paddingRight: 12,
         borderRadius: 8,
-        borderColor: colors.greyL3,
+        borderColor: colors.backgroundD2,
         borderWidth: 1,
     },
     borderDisabled: {
@@ -30,7 +30,7 @@ export const useThemeStyles = createThemeStyles(({ fonts, colors }) => ({
         left: 16,
         right: 16,
         fontFamily: fonts.primary400,
-        color: colors.greyL1,
+        color: colors.foregroundL3,
     },
     value: {
         flex: 1,
@@ -39,7 +39,7 @@ export const useThemeStyles = createThemeStyles(({ fonts, colors }) => ({
         paddingTop: 0,
         paddingBottom: 0,
         fontFamily: fonts.primary400,
-        color: colors.black,
+        color: colors.foreground,
     },
     valueLine: {
         fontSize: 16,
@@ -56,7 +56,7 @@ export const useThemeStyles = createThemeStyles(({ fonts, colors }) => ({
         top: 6,
     },
     valueEmpty: {
-        color: colors.greyL1,
+        color: colors.foregroundL3,
     },
     error: {
         marginVertical: 4,

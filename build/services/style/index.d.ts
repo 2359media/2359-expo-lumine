@@ -8,7 +8,9 @@ declare type Styles = {
     [key: string]: Style | ((...args: any[]) => Style);
 };
 export declare function createStyles<T extends Styles>(styles: T): T;
-export declare function createThemeStyles<T extends Styles>(fn: (t: Theme) => T): () => T;
+export declare function createThemeStyles<T extends Styles>(fn: (t: Theme) => T): <P>(name?: string, props?: P | undefined) => P extends object ? P & {
+    styles: T;
+} : T;
 export declare const absoluteFillObject: StyleSheet.AbsoluteFillStyle;
 export * from './colors';
 export * from './fonts';

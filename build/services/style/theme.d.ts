@@ -6,6 +6,9 @@ export interface Theme {
     key: string;
     fonts: typeof fonts;
     colors: typeof colors;
+    defaultProps?: {
+        [key: string]: any;
+    };
 }
 export declare const defaultTheme: Theme;
 export declare const darkTheme: Theme;

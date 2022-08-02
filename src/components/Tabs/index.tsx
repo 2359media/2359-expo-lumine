@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, ViewProps} from 'react-native';
-import {createThemeStyles} from '../../services/style';
+import {createStyles} from '../../services/style';
 import {Button} from '../Button';
 
 interface TabsProps extends ViewProps {
@@ -10,18 +10,16 @@ interface TabsProps extends ViewProps {
 }
 
 export function Tabs(props: TabsProps) {
-  const styles = useThemeStyles();
   return (
     <View style={[styles.container, props.style]}>
       {props.data?.map((d, i) => (
         <Button
           key={i}
           text={d}
-          sx={{
-            text: styles.text(props.selectedIndex == i),
-            pressed: styles.itemPressed,
-          }}
-          style={styles.item(props.selectedIndex == i)}
+          small
+          rounded={false}
+          light={props.selectedIndex !== i}
+          style={styles.item}
           onPress={() => props.onValueChange?.(i)}
         />
       ))}
@@ -29,23 +27,13 @@ export function Tabs(props: TabsProps) {
   );
 }
 
-const useThemeStyles = createThemeStyles(({colors}) => ({
+const styles = createStyles({
   container: {
     flexDirection: 'row',
     marginHorizontal: -2,
   },
-  item: (selected?: boolean) => ({
+  item: {
     flex: 1,
     marginHorizontal: 2,
-    minHeight: 36,
-    backgroundColor: selected ? colors.primary : colors.background,
-    paddingHorizontal: 4,
-  }),
-  text: (selected?: boolean) => ({
-    fontSize: 14,
-    color: selected ? colors.background : colors.foreground,
-  }),
-  itemPressed: {
-    opacity: 0.8,
   },
-}));
+});

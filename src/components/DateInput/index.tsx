@@ -65,7 +65,7 @@ export function DateInput(props: Props) {
       setAndroidPicker(
         <DateTimePicker
           value={pickerDate}
-          mode="time"
+          mode={mode}
           display="default"
           minimumDate={minimumDate}
           maximumDate={maximumDate}
@@ -81,7 +81,7 @@ export function DateInput(props: Props) {
   return (
     <>
       <InputContainer
-        icon={<Image source={require('../../../assets/iconCalendar20.png')} />}
+        icon={<Image source={require('../../../icons/calendar.png')} />}
         {...otherProps}
         onPress={showTimeModal}
         value={

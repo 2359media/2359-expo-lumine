@@ -11,16 +11,30 @@ export function createStyles<T extends Styles>(styles: T): T {
 }
 
 export function createThemeStyles<T extends Styles>(fn: (t: Theme) => T) {
-  const cacheStyles: {[key: string]: T} = {};
-  return function useThemeStyles() {
+  const cacheStyles: {[key: string]: any} = {};
+  return function useThemeStyles<P>(
+    name?: string,
+    props?: P
+  ): P extends object ? P & {styles: T} : T {
     const theme = useContext(ThemeContext);
     const key = theme.key;
-    return useMemo(() => {
+    const defProps = name && theme.defaultProps?.[name];
+    let styles = useMemo(() => {
       if (!cacheStyles[key]) {
-        cacheStyles[key] = fn(theme);
+        const defSx = defProps?.sx ?? {};
+        cacheStyles[key] = {...fn(theme), ...defSx};
       }
       return cacheStyles[key];
     }, [key]);
+
+    if ((props as any)?.sx) {
+      styles = {...styles, ...(props as any).sx};
+    }
+
+    if (props) {
+      return {...defProps, ...props, styles};
+    }
+    return styles;
   };
 }
 

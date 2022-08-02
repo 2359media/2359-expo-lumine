@@ -24,7 +24,7 @@ export function TopNavigation(props: Props) {
         {(canGoBack || props.backButton) && (
           <Button
             barItem
-            icon={require('../../../assets/iconBack.png')}
+            icon={require('../../../icons/back.png')}
             onPress={navigation.goBack}
             {...props.backButton}
           />

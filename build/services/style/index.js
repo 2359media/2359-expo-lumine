@@ -6,15 +6,24 @@ export function createStyles(styles) {
 }
 export function createThemeStyles(fn) {
     const cacheStyles = {};
-    return function useThemeStyles() {
+    return function useThemeStyles(name, props) {
         const theme = useContext(ThemeContext);
         const key = theme.key;
-        return useMemo(() => {
+        const defProps = name && theme.defaultProps?.[name];
+        let styles = useMemo(() => {
             if (!cacheStyles[key]) {
-                cacheStyles[key] = fn(theme);
+                const defSx = defProps?.sx ?? {};
+                cacheStyles[key] = { ...fn(theme), ...defSx };
             }
             return cacheStyles[key];
         }, [key]);
+        if (props?.sx) {
+            styles = { ...styles, ...props.sx };
+        }
+        if (props) {
+            return { ...defProps, ...props, styles };
+        }
+        return styles;
     };
 }
 export const absoluteFillObject = StyleSheet.absoluteFillObject;

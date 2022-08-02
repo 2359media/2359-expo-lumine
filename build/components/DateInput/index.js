@@ -32,14 +32,14 @@ export function DateInput(props) {
             });
         }
         else {
-            setAndroidPicker(<DateTimePicker value={pickerDate} mode="time" display="default" minimumDate={minimumDate} maximumDate={maximumDate} onChange={(_, d) => {
+            setAndroidPicker(<DateTimePicker value={pickerDate} mode={mode} display="default" minimumDate={minimumDate} maximumDate={maximumDate} onChange={(_, d) => {
                     setAndroidPicker(undefined);
                     onValueChange?.(d);
                 }}/>);
         }
     }
     return (<>
-      <InputContainer icon={<Image source={require('../../../assets/iconCalendar20.png')}/>} {...otherProps} onPress={showTimeModal} value={value &&
+      <InputContainer icon={<Image source={require('../../../icons/calendar.png')}/>} {...otherProps} onPress={showTimeModal} value={value &&
             format(value, dateFormat ?? (mode == 'date' ? 'dd MMM yyyy' : 'h:mm aa'))}/>
       {androidPicker}
     </>);

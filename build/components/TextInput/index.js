@@ -20,7 +20,9 @@ export function TextInput(props) {
         focus.value = false;
     }
     return (<InputContainer {...props} onPress={onPress} focus={focus} icon={props.secureTextEntry && (<Pressable hitSlop={hitSlop} onPress={() => setSecure(!secure)}>
-            <Image source={require('../../../assets/iconEyeOn20.png')}/>
+            <Image source={secure
+                ? require('../../../icons/eyeOff.png')
+                : require('../../../icons/eye.png')}/>
           </Pressable>)}>
       {styleProps => (<RNTI ref={tiRef} onChangeText={props.onValueChange} {...props} {...styleProps} onFocus={onFocus} onBlur={onBlur} secureTextEntry={secure}/>)}
     </InputContainer>);

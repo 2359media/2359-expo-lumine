@@ -39,7 +39,13 @@ export function TextInput(props: TextInputProps) {
       icon={
         props.secureTextEntry && (
           <Pressable hitSlop={hitSlop} onPress={() => setSecure(!secure)}>
-            <Image source={require('../../../assets/iconEyeOn20.png')} />
+            <Image
+              source={
+                secure
+                  ? require('../../../icons/eyeOff.png')
+                  : require('../../../icons/eye.png')
+              }
+            />
           </Pressable>
         )
       }

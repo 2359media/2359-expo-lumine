@@ -11,8 +11,7 @@ export function showCustomAlert(props) {
     showModal(d => <Alert {...props} dismiss={d}/>, { position: 'center' });
 }
 function Alert(props) {
-    const { title, message, children, dismiss, buttons } = props;
-    const styles = useThemeStyles();
+    const { title, message, children, dismiss, buttons, styles } = useThemeStyles('Alert', props);
     return (<View style={styles.container}>
       {!!title && <Text style={styles.title}>{title}</Text>}
       {!!message && <Text style={styles.message}>{message}</Text>}

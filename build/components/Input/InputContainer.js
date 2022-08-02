@@ -3,8 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 import { AnimatedTitle } from './AnimatedTitle';
 import { useThemeStyles } from './styles';
 export function InputContainer(props) {
-    const { title, placeholder, value, onPress, focus, children, rounded, error, editable = true, icon, style, } = props;
-    const styles = useThemeStyles();
+    const { title, placeholder, value, onPress, focus, children, rounded, error, editable = true, icon, style, styles, } = useThemeStyles('Input', props);
     const type = (rounded && 'Rounded') || 'Line';
     const forceOnTop = !!value || !!placeholder;
     function getStyle(name, ...otherStyles) {

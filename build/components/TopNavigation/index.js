@@ -9,7 +9,7 @@ export function TopNavigation(props) {
     const canGoBack = useMemo(() => navigation.canGoBack(), []);
     return (<View style={styles.container}>
       <View style={styles.sideContainer}>
-        {(canGoBack || props.backButton) && (<Button barItem icon={require('../../../assets/iconBack.png')} onPress={navigation.goBack} {...props.backButton}/>)}
+        {(canGoBack || props.backButton) && (<Button barItem icon={require('../../../icons/back.png')} onPress={navigation.goBack} {...props.backButton}/>)}
         {props.left}
       </View>
       <View style={styles.centerContainer}>

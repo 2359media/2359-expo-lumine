@@ -1,15 +1,19 @@
 import React from 'react';
-import { Text, Image, Pressable } from 'react-native';
-import { createThemeStyles } from '../../services/style';
+import { Text, Image, Pressable, View } from 'react-native';
+import { createThemeStyles, lightenDarkenColor } from '../../services/style';
 const hitSlop = { bottom: 8, top: 8, right: 8, left: 8 };
 export function Button(props) {
-    const { text, icon, sx, secondary, barItem, link, small, large, rounded, disabled, style, children, onPress, ...rest } = props;
-    const styles = useThemeStyles();
-    const type = (secondary && 'Secondary') ||
-        (link && 'Link') ||
-        (barItem && 'BarItem') ||
+    const { text, icon, secondary, success, danger, warning, info, light, dark, link, barItem, small, large, rounded, disabled, style, children, onPress, styles, ...rest } = useThemeStyles('Button', props);
+    const type = (link && 'Link') || (barItem && 'BarItem') || 'Btn';
+    const tint = (secondary && 'Secondary') ||
+        (success && 'Success') ||
+        (danger && 'Danger') ||
+        (warning && 'Warning') ||
+        (info && 'Info') ||
+        (light && 'Light') ||
+        (dark && 'Dark') ||
         'Primary';
-    function getStyle(name, pressed, s, ps) {
+    function getStyle(name, pressed, s) {
         const anyStyles = styles;
         return [
             anyStyles[name],
@@ -17,16 +21,19 @@ export function Button(props) {
             rounded && anyStyles[name + type + 'Rounded'],
             small && anyStyles[name + type + 'Small'],
             large && anyStyles[name + type + 'Large'],
+            anyStyles[name + type + tint],
             pressed && anyStyles[name + type + 'Pressed'],
+            pressed && anyStyles[name + type + tint + 'Pressed'],
             disabled && anyStyles[name + type + 'Disabled'],
+            disabled && anyStyles[name + type + tint + 'Disabled'],
             s,
-            pressed && ps,
         ].filter(s => s);
     }
-    return (<Pressable disabled={disabled} hitSlop={hitSlop} style={({ pressed }) => getStyle('container', pressed, style, sx?.pressed)} onPress={() => onPress?.()} {...rest}>
+    return (<Pressable disabled={disabled} hitSlop={hitSlop} style={({ pressed }) => getStyle('container', pressed, style)} onPress={() => onPress?.()} {...rest}>
       {({ pressed }) => (<>
-          {icon && (<Image style={getStyle('icon', pressed, sx?.icon, sx?.iconPressed)} source={icon}/>)}
-          {!!text && (<Text style={getStyle('text', pressed, sx?.text, sx?.textPressed)} numberOfLines={1}>
+          {icon && <Image style={getStyle('icon', pressed)} source={icon}/>}
+          {icon && !!text && <View style={styles.spacer}/>}
+          {!!text && (<Text style={getStyle('text', pressed)} numberOfLines={1}>
               {text}
             </Text>)}
           {children}
@@ -34,61 +41,76 @@ export function Button(props) {
     </Pressable>);
 }
 const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
+    spacer: {
+        width: 12,
+        height: 12,
+    },
     container: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    containerBtn: {
+        borderRadius: 8,
+        paddingHorizontal: 8,
         minHeight: 48,
     },
-    containerPrimary: {
-        borderRadius: 8,
-        paddingHorizontal: 18,
-        backgroundColor: colors.primary,
-    },
-    containerPrimaryPressed: {
-        backgroundColor: colors.primaryD1,
-    },
-    containerPrimaryDisabled: {
+    containerBtnDisabled: {
         backgroundColor: colors.disabled,
     },
-    containerPrimaryRounded: {
+    containerBtnRounded: {
         borderRadius: 24,
     },
-    containerSecondary: {
-        borderRadius: 8,
-        paddingHorizontal: 18,
+    containerBtnSmall: {
+        paddingHorizontal: 4,
+        minHeight: 36,
+    },
+    containerBtnPrimary: {
+        backgroundColor: colors.primary,
+    },
+    containerBtnPrimaryPressed: {
+        backgroundColor: colors.primaryD1,
+    },
+    containerBtnDanger: {
+        backgroundColor: colors.danger,
+    },
+    containerBtnDangerPressed: {
+        backgroundColor: lightenDarkenColor(colors.danger, -20),
+    },
+    containerBtnLight: {
+        backgroundColor: colors.background,
+    },
+    containerBtnLightPressed: {
+        backgroundColor: colors.backgroundD1,
+    },
+    containerBtnSecondary: {
         borderWidth: 1,
         borderColor: colors.primary,
     },
-    containerSecondaryPressed: {
+    containerBtnSecondaryPressed: {
         borderColor: colors.primaryD1,
     },
-    containerSecondaryDisabled: {
+    containerBtnSecondaryDisabled: {
+        backgroundColor: undefined,
         borderColor: colors.disabled,
-    },
-    containerSecondaryRounded: {
-        borderRadius: 24,
     },
     containerBarItem: {
         minHeight: 40,
         minWidth: 40,
     },
-    icon: {
-        margin: 6,
-    },
-    iconPrimary: {
+    iconBtn: {
         tintColor: colors.white,
     },
-    iconPrimaryDisabled: {
+    iconBtnDisabled: {
         tintColor: colors.disabledD1,
     },
-    iconSecondary: {
+    iconBtnSecondary: {
         tintColor: colors.primary,
     },
-    iconSecondaryPressed: {
+    iconBtnSecondaryPressed: {
         tintColor: colors.primaryD1,
     },
-    iconSecondaryDisabled: {
+    iconBtnSecondaryDisabled: {
         tintColor: colors.disabledD1,
     },
     iconBarItem: {
@@ -101,24 +123,29 @@ const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
         tintColor: colors.disabledD1,
     },
     text: {
-        margin: 6,
         fontFamily: fonts.primary600,
         fontSize: 16,
     },
-    textPrimary: {
+    textBtn: {
         color: colors.background,
     },
-    textPrimaryDisabled: {
+    textBtnSmall: {
+        fontSize: 14,
+    },
+    textBtnDisabled: {
         color: colors.disabledD1,
     },
-    textSecondary: {
+    textBtnSecondary: {
         color: colors.primary,
     },
-    textSecondaryPressed: {
+    textBtnSecondaryPressed: {
         color: colors.primaryD1,
     },
-    textSecondaryDisabled: {
+    textBtnSecondaryDisabled: {
         color: colors.disabledD1,
+    },
+    textBtnLight: {
+        color: colors.foreground,
     },
     textLink: {
         color: colors.primary,

@@ -26,8 +26,11 @@ export function showCustomAlert(props: AlertProps) {
 }
 
 function Alert(props: AlertProps & {dismiss(): void}) {
-  const {title, message, children, dismiss, buttons} = props;
-  const styles = useThemeStyles();
+  const {title, message, children, dismiss, buttons, styles} = useThemeStyles(
+    'Alert',
+    props
+  );
+
   return (
     <View style={styles.container}>
       {!!title && <Text style={styles.title}>{title}</Text>}
