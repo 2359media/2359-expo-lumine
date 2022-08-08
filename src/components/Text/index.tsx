@@ -8,6 +8,7 @@ interface Props extends RNTP {
   /** 18pt */ h3?: boolean;
   /** 16pt */ h4?: boolean;
   /** 14pt */ h5?: boolean;
+  /** 16pt */ p1?: boolean;
   /** 14pt */ p2?: boolean;
   /** 12pt */ p3?: boolean;
   /** 12pt */ p4?: boolean;
@@ -19,18 +20,22 @@ export function Text(props: Props) {
   return <RNT {...props} style={getStyle(styles, props)} />;
 }
 
+const types = ['h1', 'h2', 'h3', 'h4', 'h5', 'p1', 'p2', 'p3', 'p4', 'f1'];
+
 function getStyle(styles: any, props: Props) {
-  const style: any = [];
-  const type =
-    ['h1', 'h2', 'h3', 'h4', 'h5', 'p2', 'p3', 'p4', 'f1'].find(
-      t => props[t as keyof Props]
-    ) || 'p1';
-  style.push(styles[type]);
+  const style: any[] = [];
+  const type = types.find(t => props[t as keyof Props]);
+  if (type || !props.onPress) {
+    style.push(styles[type ?? 'p1']);
+  }
   if (props.onPress) {
     style.push(styles.link);
   }
   if (props.style) {
     style.push(props.style);
+  }
+  if (style.length < 2) {
+    return style[0];
   }
   return style;
 }
@@ -97,7 +102,7 @@ const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
     lineHeight: 14,
   },
   link: {
-    fontFamily: fonts.primary600,
+    fontFamily: fonts.primary700,
     color: colors.primary,
   },
 }));

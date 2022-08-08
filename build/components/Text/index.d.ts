@@ -6,6 +6,7 @@ interface Props extends RNTP {
     /** 18pt */ h3?: boolean;
     /** 16pt */ h4?: boolean;
     /** 14pt */ h5?: boolean;
+    /** 16pt */ p1?: boolean;
     /** 14pt */ p2?: boolean;
     /** 12pt */ p3?: boolean;
     /** 12pt */ p4?: boolean;

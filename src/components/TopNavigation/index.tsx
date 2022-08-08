@@ -10,13 +10,17 @@ interface Props {
   backButton?: ButtonProps;
   left?: any;
   rightButtons?: ButtonProps[];
+  canGoBack?: boolean;
   right?: any;
   center?: any;
 }
 
 export function TopNavigation(props: Props) {
   const navigation = useNavigation();
-  const canGoBack = useMemo(() => navigation.canGoBack(), []);
+  const canGoBack = useMemo(
+    () => props.canGoBack ?? navigation.canGoBack(),
+    [props.canGoBack]
+  );
 
   return (
     <View style={styles.container}>

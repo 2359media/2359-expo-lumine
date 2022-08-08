@@ -5,6 +5,7 @@ interface Props {
     backButton?: ButtonProps;
     left?: any;
     rightButtons?: ButtonProps[];
+    canGoBack?: boolean;
     right?: any;
     center?: any;
 }

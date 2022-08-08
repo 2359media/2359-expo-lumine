@@ -6,7 +6,7 @@ import { Button } from '../Button';
 import { createStyles } from '../../services/style';
 export function TopNavigation(props) {
     const navigation = useNavigation();
-    const canGoBack = useMemo(() => navigation.canGoBack(), []);
+    const canGoBack = useMemo(() => props.canGoBack ?? navigation.canGoBack(), [props.canGoBack]);
     return (<View style={styles.container}>
       <View style={styles.sideContainer}>
         {(canGoBack || props.backButton) && (<Button barItem icon={require('../../../icons/back.png')} onPress={navigation.goBack} {...props.backButton}/>)}

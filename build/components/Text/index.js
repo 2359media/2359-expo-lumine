@@ -5,15 +5,21 @@ export function Text(props) {
     const styles = useThemeStyles();
     return <RNT {...props} style={getStyle(styles, props)}/>;
 }
+const types = ['h1', 'h2', 'h3', 'h4', 'h5', 'p1', 'p2', 'p3', 'p4', 'f1'];
 function getStyle(styles, props) {
     const style = [];
-    const type = ['h1', 'h2', 'h3', 'h4', 'h5', 'p2', 'p3', 'p4', 'f1'].find(t => props[t]) || 'p1';
-    style.push(styles[type]);
+    const type = types.find(t => props[t]);
+    if (type || !props.onPress) {
+        style.push(styles[type ?? 'p1']);
+    }
     if (props.onPress) {
         style.push(styles.link);
     }
     if (props.style) {
         style.push(props.style);
+    }
+    if (style.length < 2) {
+        return style[0];
     }
     return style;
 }
@@ -79,7 +85,7 @@ const useThemeStyles = createThemeStyles(({ colors, fonts }) => ({
         lineHeight: 14,
     },
     link: {
-        fontFamily: fonts.primary600,
+        fontFamily: fonts.primary700,
         color: colors.primary,
     },
 }));
