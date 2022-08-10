@@ -1,4 +1,4 @@
-import {useMemo, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {Keyboard} from 'react-native';
 
 type Config = {
@@ -27,6 +27,7 @@ type Input<T = any> = {
   error?: string;
   optional?: boolean;
   editable?: boolean;
+  edited?: boolean;
   inputRef?(r: any): {focus?(): void};
 };
 
@@ -58,8 +59,20 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
   const configRef = useRef(config);
   configRef.current = config;
 
+  const timeoutRef = useRef<any>();
+
+  useEffect(() => {
+    return () => {
+      timeoutRef.current && clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
   return useMemo(() => {
     const form: Form<T> = {hasUnsavedChanges: false} as Form<T>;
+    let maps: {
+      config: Config;
+      input: Input<any>;
+    }[] = [];
 
     function getValues<T extends SubConfig>(
       c: T,
@@ -85,8 +98,8 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
       return values;
     }
 
-    function flattenInputs() {
-      const maps: {config: Config; input: Input<any>}[] = [];
+    function reloadMaps() {
+      maps = [];
       function fillInputs<T extends SubConfig>(c: T, f: SubForm<T>) {
         Object.keys(c).forEach(k => {
           if (Array.isArray(c[k].input)) {
@@ -101,11 +114,9 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
         });
       }
       fillInputs(config.input, form.input);
-      return maps;
     }
 
     function nextFrom(input: Input<any>) {
-      const maps = flattenInputs();
       const i = maps.findIndex(m => m.input == input);
       if (i == maps.length - 1) {
         form.submit();
@@ -120,15 +131,24 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
     }
 
     function validateValues() {
-      const maps = flattenInputs();
-      maps.map((m, i) => {
-        m.input.hasNextInput = i < maps.length - 1;
-        m.input.error =
-          m.config.validator && m.config.validator(m.input.value, form.input);
-      });
       form.submitDisabled = maps.some(
-        m => m.input.error || (!m.config.optional && !m.input.value)
+        m =>
+          (!m.config.optional && !m.input.value) ||
+          m.config.validator?.(m.input.value, form.input)
       );
+
+      function showError() {
+        maps.forEach((m, i) => {
+          m.input.hasNextInput = i < maps.length - 1;
+          m.input.error = m.input.edited
+            ? m.config.validator?.(m.input.value, form.input)
+            : undefined;
+        });
+        setDate(new Date());
+      }
+
+      timeoutRef.current && clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(showError, 500);
     }
 
     function getInput<T extends SubConfig>(c: T, d: any): any {
@@ -142,11 +162,13 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
             inputs,
             add() {
               inputs.push(getInput(subC, undefined));
+              reloadMaps();
               validateValues();
               setDate(new Date());
             },
             remove(index: number) {
               inputs.splice(index, 1);
+              reloadMaps();
               validateValues();
               setDate(new Date());
             },
@@ -158,6 +180,7 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
             value: d?.[k] ?? c[k].initialValue,
             editable: c[k].editable ?? true,
             optional: c[k].optional ?? false,
+            edited: false,
           };
           if (d?.[k] && d[k] !== c[k].initialValue) {
             form.hasUnsavedChanges = true;
@@ -168,6 +191,8 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
           input.onValueChange = (value: any) => {
             form.hasUnsavedChanges = true;
             input.value = value;
+            input.edited = true;
+            input.error = undefined;
             validateValues();
             setDate(new Date());
           };
@@ -210,6 +235,7 @@ export function useForm<T extends RootConfig>(config: T): Form<T> {
     // const draft = config.draftId && getState().drafts[config.draftId];
     form.input = getInput(config.input, false /*draft*/);
 
+    reloadMaps();
     validateValues();
 
     return form;
