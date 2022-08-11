@@ -23,6 +23,7 @@ declare type Input<T = any> = {
     error?: string;
     optional?: boolean;
     editable?: boolean;
+    edited?: boolean;
     inputRef?(r: any): {
         focus?(): void;
     };

@@ -42,9 +42,6 @@
     "react-native-screens": "~3.11.1",
     "typescript": "*"
   },
-  "resolutions": {
-    "@types/react": "17.0.30"
-  },
   "files": [
     "build",
     "icons",
