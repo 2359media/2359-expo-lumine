@@ -17,5 +17,7 @@ export interface ButtonProps extends ViewProps {
     rounded?: boolean;
     disabled?: boolean;
     onPress?(): void;
+    event?: string;
+    eventBody?: object;
 }
 export declare function Button(props: ButtonProps): JSX.Element;

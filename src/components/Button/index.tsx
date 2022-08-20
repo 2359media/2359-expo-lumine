@@ -1,8 +1,7 @@
 import React from 'react';
 import {Text, Image, Pressable, ViewProps, View} from 'react-native';
 import {createThemeStyles, lightenDarkenColor} from '../../services/style';
-
-const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
+import m from '../../../modules';
 
 export interface ButtonProps extends ViewProps {
   text?: string;
@@ -24,6 +23,9 @@ export interface ButtonProps extends ViewProps {
   rounded?: boolean;
   disabled?: boolean;
   onPress?(): void;
+
+  event?: string;
+  eventBody?: object;
 }
 
 export function Button(props: ButtonProps) {
@@ -49,8 +51,11 @@ export function Button(props: ButtonProps) {
     children,
     onPress,
     styles,
+    event,
+    eventBody,
     ...rest
   } = useThemeStyles('Button', props);
+  const {track} = m.Analytics.useAnalytics();
 
   const type = (link && 'Link') || (barItem && 'BarItem') || 'Btn';
   const tint =
@@ -83,9 +88,13 @@ export function Button(props: ButtonProps) {
   return (
     <Pressable
       disabled={disabled}
-      hitSlop={hitSlop}
+      hitSlop={8}
       style={({pressed}) => getStyle('container', pressed, style)}
-      onPress={() => onPress?.()}
+      onPress={() => {
+        const eventName = event || text;
+        eventName && track(eventName, eventBody);
+        onPress?.();
+      }}
       {...rest}
     >
       {({pressed}) => (
@@ -189,9 +198,11 @@ const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
   text: {
     fontFamily: fonts.primary600,
     fontSize: 16,
+    textAlign: 'center',
   },
   textBtn: {
     color: colors.background,
+    flexGrow: 1,
   },
   textBtnSmall: {
     fontSize: 14,

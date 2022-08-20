@@ -43,6 +43,12 @@ interface Modules {
     };
     SafeAreaProvider(props: {children: any}): any;
   };
+  Analytics: {
+    useAnalytics(): {
+      screen(name: string, body?: object): void;
+      track(event: string, body?: object): void;
+    };
+  };
 }
 
 declare const modules: Modules;

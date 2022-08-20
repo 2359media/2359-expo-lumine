@@ -5,6 +5,7 @@ export interface InputProps<T> {
     title?: string;
     placeholder?: string;
     icon?: any;
+    iconOnPress?(): void;
     error?: string;
     editable?: boolean;
     value?: T;

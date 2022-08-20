@@ -1,14 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {
-  Pressable,
-  TextInput as RNTI,
-  TextInputProps as RNTIP,
-  Image,
-} from 'react-native';
+import {TextInput as RNTI, TextInputProps as RNTIP} from 'react-native';
 import r from '../../../modules/reanimated';
 import {InputContainer, InputProps} from '../Input';
-
-const hitSlop = {bottom: 8, top: 8, right: 8, left: 8};
 
 export interface TextInputProps extends InputProps<string>, RNTIP {}
 
@@ -37,18 +30,13 @@ export function TextInput(props: TextInputProps) {
       onPress={onPress}
       focus={focus}
       icon={
-        props.secureTextEntry && (
-          <Pressable hitSlop={hitSlop} onPress={() => setSecure(!secure)}>
-            <Image
-              source={
-                secure
-                  ? require('../../../icons/eyeOff.png')
-                  : require('../../../icons/eye.png')
-              }
-            />
-          </Pressable>
-        )
+        props.secureTextEntry
+          ? secure
+            ? require('../../../icons/eyeOff.png')
+            : require('../../../icons/eye.png')
+          : undefined
       }
+      iconOnPress={() => setSecure(!secure)}
     >
       {styleProps => (
         <RNTI

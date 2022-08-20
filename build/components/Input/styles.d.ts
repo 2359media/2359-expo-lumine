@@ -58,6 +58,9 @@ export declare const useThemeStyles: <P>(name?: string | undefined, props?: P | 
         valueEmpty: {
             color: string;
         };
+        icon: {
+            tintColor: string;
+        };
         error: {
             marginVertical: number;
             marginHorizontal: number;
@@ -124,6 +127,9 @@ export declare const useThemeStyles: <P>(name?: string | undefined, props?: P | 
     };
     valueEmpty: {
         color: string;
+    };
+    icon: {
+        tintColor: string;
     };
     error: {
         marginVertical: number;

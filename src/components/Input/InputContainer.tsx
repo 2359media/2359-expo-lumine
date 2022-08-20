@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Pressable, ViewProps} from 'react-native';
+import {View, Text, Pressable, ViewProps, Image} from 'react-native';
 import {SharedValue} from '../../../modules/reanimated';
 import {AnimatedTitle} from './AnimatedTitle';
 import {useThemeStyles} from './styles';
@@ -8,6 +8,7 @@ export interface InputProps<T> {
   title?: string;
   placeholder?: string;
   icon?: any;
+  iconOnPress?(): void;
   error?: string;
   editable?: boolean;
   value?: T;
@@ -33,6 +34,7 @@ export function InputContainer<T>(props: InputContainerProps<T>) {
     error,
     editable = true,
     icon,
+    iconOnPress,
     style,
     styles,
   } = useThemeStyles('Input', props);
@@ -76,7 +78,15 @@ export function InputContainer<T>(props: InputContainerProps<T>) {
         ) : (
           <Text style={getStyle('value')}>{value || placeholder || ' '}</Text>
         )}
-        {icon}
+        {icon ? (
+          iconOnPress ? (
+            <Pressable hitSlop={8} onPress={() => iconOnPress()}>
+              <Image style={styles.icon} source={icon} />
+            </Pressable>
+          ) : (
+            <Image style={styles.icon} source={icon} />
+          )
+        ) : undefined}
       </Pressable>
       {!!error && <Text style={styles.error}>{error}</Text>}
     </View>

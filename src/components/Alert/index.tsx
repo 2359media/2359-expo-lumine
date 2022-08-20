@@ -77,7 +77,7 @@ const useThemeStyles = createThemeStyles(({colors, fonts}) => ({
     color: colors.foreground,
   },
   buttonContainer: {
-    marginTop: 12,
+    marginTop: 20,
     flexDirection: 'row',
     marginHorizontal: -4,
   },

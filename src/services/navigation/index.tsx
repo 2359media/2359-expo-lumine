@@ -1,9 +1,10 @@
-import {useContext} from 'react';
+import {useContext, useCallback} from 'react';
 import {
   NavigationContainerRef,
   useNavigation as useNav,
   NavigationContainer as NC,
   ParamListBase,
+  useFocusEffect,
 } from '@react-navigation/native';
 import {
   createNativeStackNavigator as CNSN,
@@ -11,6 +12,7 @@ import {
 } from '@react-navigation/native-stack';
 import {createBottomTabNavigator as CBTN} from '@react-navigation/bottom-tabs';
 import {Text, View} from 'react-native';
+import m from '../../../modules';
 import {ThemeContext} from '../style';
 
 export function createNavigator<T extends ParamListBase>() {
@@ -33,7 +35,13 @@ export function createNavigator<T extends ParamListBase>() {
 
   function createScreen<K extends KR>(key: K, Screen: S<K>) {
     screens[key] = function (p: any) {
-      return <Screen {...p.route?.params} />;
+      const params = p.route?.params;
+
+      //track screen
+      const {screen} = m.Analytics.useAnalytics();
+      useFocusEffect(useCallback(() => screen(key as string, params), []));
+
+      return <Screen {...params} />;
     };
     if (__DEV__) {
       setTimeout(() => {

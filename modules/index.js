@@ -1,3 +1,5 @@
+import {useMemo, Fragment} from 'react';
+
 const modules = {
   Font: {
     loadAsync: () => Promise.reject(),
@@ -32,11 +34,11 @@ const modules = {
   },
   SafeArea: {
     useSafeAreaInsets: () =>
-      require('react').useMemo(
-        () => ({left: 0, right: 0, top: 0, bottom: 0}),
-        []
-      ),
-    SafeAreaProvider: require('react').Fragment,
+      useMemo(() => ({left: 0, right: 0, top: 0, bottom: 0}), []),
+    SafeAreaProvider: Fragment,
+  },
+  Analytics: {
+    useAnalytics: () => useMemo(() => ({screen() {}, track() {}}), []),
   },
 };
 

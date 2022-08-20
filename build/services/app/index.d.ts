@@ -8,3 +8,4 @@ interface Props extends ViewProps {
 }
 export declare function AppProvider(props: Props): JSX.Element;
 export * from './AppModal';
+export * from './AppState';

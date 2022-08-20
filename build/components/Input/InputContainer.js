@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import { AnimatedTitle } from './AnimatedTitle';
 import { useThemeStyles } from './styles';
 export function InputContainer(props) {
-    const { title, placeholder, value, onPress, focus, children, rounded, error, editable = true, icon, style, styles, } = useThemeStyles('Input', props);
+    const { title, placeholder, value, onPress, focus, children, rounded, error, editable = true, icon, iconOnPress, style, styles, } = useThemeStyles('Input', props);
     const type = (rounded && 'Rounded') || 'Line';
     const forceOnTop = !!value || !!placeholder;
     function getStyle(name, ...otherStyles) {
@@ -26,7 +26,9 @@ export function InputContainer(props) {
             style: getStyle('value'),
             placeholderTextColor: styles.valueEmpty.color,
         })) : (<Text style={getStyle('value')}>{value || placeholder || ' '}</Text>)}
-        {icon}
+        {icon ? (iconOnPress ? (<Pressable hitSlop={8} onPress={() => iconOnPress()}>
+              <Image style={styles.icon} source={icon}/>
+            </Pressable>) : (<Image style={styles.icon} source={icon}/>)) : undefined}
       </Pressable>
       {!!error && <Text style={styles.error}>{error}</Text>}
     </View>);

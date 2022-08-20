@@ -59,6 +59,9 @@ export const useThemeStyles = createThemeStyles(({fonts, colors}) => ({
   valueEmpty: {
     color: colors.foregroundL3,
   },
+  icon: {
+    tintColor: colors.foregroundL3,
+  },
   error: {
     marginVertical: 4,
     marginHorizontal: 16,

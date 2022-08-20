@@ -107,7 +107,7 @@ const useThemeStyles = createThemeStyles(({colors}) => ({
   },
   background: {
     ...absoluteFillObject,
-    backgroundColor: withOpacity(colors.foreground, 0.2),
+    backgroundColor: withOpacity(colors.black, 0.5),
   },
   content: (isCenter: boolean) => ({
     flex: 1,
