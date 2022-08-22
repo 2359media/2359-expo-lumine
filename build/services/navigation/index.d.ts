@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { NavigationContainerRef, ParamListBase } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export declare function createNavigator<T extends ParamListBase>(): {

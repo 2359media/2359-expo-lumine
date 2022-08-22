@@ -35,7 +35,7 @@ export declare type APIState<P extends any[], D> = {
     updateData(fn: (oldData?: D) => D | D): void;
 };
 export interface APIConfig {
-    client: APIClient;
+    client?: APIClient;
     useMockData?: boolean;
 }
 export {};

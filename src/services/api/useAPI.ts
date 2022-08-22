@@ -29,9 +29,7 @@ export default function useAPI<P extends any[], D>(
 }
 
 export function useResult<T>(value: T, fn: (v: NonNullable<T>) => void): void {
-  const oldValue = useRef(value);
   useEffect(() => {
-    oldValue.current != value && value != null && fn(value!);
-    oldValue.current = value;
-  });
+    value != null && fn(value!);
+  }, [value]);
 }

@@ -8,7 +8,16 @@ interface StoreProps<T> {
   initialState: T;
 }
 
-export function createStore<T extends Object>(props: StoreProps<T>) {
+export interface Store<T extends object> {
+  getState(): T;
+  subscribe(l: () => void): () => void;
+  updateState(newState: DeepPartial<T> | ((state: T) => DeepPartial<T>)): void;
+  resetStateExcept(keys: (keyof T)[]): void;
+  useSelector<S>(fn: (s: T) => S): S;
+  loadStore(): Promise<void>;
+}
+
+export function createStore<T extends object>(props: StoreProps<T>): Store<T> {
   const devTools: any = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
 
   let persistor: any;

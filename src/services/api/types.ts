@@ -33,6 +33,6 @@ export type APIState<P extends any[], D> = {
 };
 
 export interface APIConfig {
-  client: APIClient;
+  client?: APIClient;
   useMockData?: boolean;
 }

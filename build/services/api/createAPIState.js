@@ -40,6 +40,7 @@ export default function createAPIState(config) {
         }
         if (api.then) {
             updateState({ ...initialState, error: undefined });
+            await new Promise(r => setTimeout(r, 100));
             try {
                 api = await api;
             }

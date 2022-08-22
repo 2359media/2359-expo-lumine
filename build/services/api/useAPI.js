@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { APIContext } from './context';
 import createAPIState from './createAPIState';
 import m from '../../../modules';
@@ -20,9 +20,7 @@ export default function useAPI(api) {
     return useMemo(() => createAPIState(config), []);
 }
 export function useResult(value, fn) {
-    const oldValue = useRef(value);
     useEffect(() => {
-        oldValue.current != value && value != null && fn(value);
-        oldValue.current = value;
-    });
+        value != null && fn(value);
+    }, [value]);
 }
