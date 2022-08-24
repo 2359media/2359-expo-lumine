@@ -1,6 +1,6 @@
 export default function findErrorMessage(r) {
     if (typeof r == 'string') {
-        return r;
+        return r.replace(/^\[.*\] /, '');
     }
     if (typeof r == 'object') {
         return findErrorMessage(r.message || r.messages || Object.values(r)[0]);
