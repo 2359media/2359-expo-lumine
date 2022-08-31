@@ -20,7 +20,9 @@ export function createNavigator() {
             const params = p.route?.params;
             //track screen
             const { screen } = m.Analytics.useAnalytics();
-            useFocusEffect(useCallback(() => screen(key, params), []));
+            useFocusEffect(useCallback(() => {
+                screen(key, params);
+            }, []));
             return <Screen {...params}/>;
         };
         if (__DEV__) {

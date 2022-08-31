@@ -39,7 +39,11 @@ export function createNavigator<T extends ParamListBase>() {
 
       //track screen
       const {screen} = m.Analytics.useAnalytics();
-      useFocusEffect(useCallback(() => screen(key as string, params), []));
+      useFocusEffect(
+        useCallback(() => {
+          screen(key as string, params);
+        }, [])
+      );
 
       return <Screen {...params} />;
     };
