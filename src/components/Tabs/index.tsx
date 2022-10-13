@@ -11,15 +11,13 @@ interface TabsProps extends ViewProps {
 
 export function Tabs(props: TabsProps) {
   return (
-    <View style={[styles.container, props.style]}>
+    <View style={[styles.tabs, props.style]}>
       {props.data?.map((d, i) => (
         <Button
           key={i}
           text={d}
-          small
-          rounded={false}
-          light={props.selectedIndex !== i}
-          style={styles.item}
+          type={props.selectedIndex == i ? 'primary' : 'light'}
+          sx={styles}
           onPress={() => props.onValueChange?.(i)}
         />
       ))}
@@ -28,12 +26,16 @@ export function Tabs(props: TabsProps) {
 }
 
 const styles = createStyles({
-  container: {
+  tabs: {
     flexDirection: 'row',
     marginHorizontal: -2,
   },
-  item: {
+  container: {
     flex: 1,
     marginHorizontal: 2,
+    minHeight: 36,
+  },
+  text: {
+    fontSize: 14,
   },
 });

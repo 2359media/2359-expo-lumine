@@ -36,8 +36,8 @@ export function InputContainer<T>(props: InputContainerProps<T>) {
     icon,
     iconOnPress,
     style,
-    styles,
-  } = useThemeStyles('Input', props);
+  } = props;
+  const styles = useThemeStyles('Input');
 
   const type = (rounded && 'Rounded') || 'Line';
   const forceOnTop = !!value || !!placeholder;

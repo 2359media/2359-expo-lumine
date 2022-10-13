@@ -26,10 +26,8 @@ export function showCustomAlert(props: AlertProps) {
 }
 
 function Alert(props: AlertProps & {dismiss(): void}) {
-  const {title, message, children, dismiss, buttons, styles} = useThemeStyles(
-    'Alert',
-    props
-  );
+  const {title, message, children, dismiss, buttons} = props;
+  const styles = useThemeStyles('Alert');
 
   return (
     <View style={styles.container}>
@@ -42,11 +40,16 @@ function Alert(props: AlertProps & {dismiss(): void}) {
             key={i}
             style={styles.button}
             text={b.text}
-            secondary={b.style == 'cancel'}
-            danger={b.style == 'destructive'}
+            type={
+              b.style == 'cancel'
+                ? 'secondary'
+                : b.style == 'destructive'
+                ? 'danger'
+                : 'primary'
+            }
             onPress={() => {
               dismiss();
-              b.onPress && b.onPress();
+              b.onPress && setTimeout(b.onPress, 300);
             }}
           />
         ))}

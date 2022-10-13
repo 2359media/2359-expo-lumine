@@ -1,6 +1,6 @@
 import {persistReducer} from 'redux-persist';
 import storage from './storage';
-import {deepMerge} from './utils';
+import {deepMerge} from '../utils';
 
 export const actionTypes = {
   update: 'update',

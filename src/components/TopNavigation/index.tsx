@@ -27,7 +27,7 @@ export function TopNavigation(props: Props) {
       <View style={styles.sideContainer}>
         {(canGoBack || props.backButton) && (
           <Button
-            barItem
+            type="barItem"
             icon={require('../../../icons/back.png')}
             onPress={navigation.goBack}
             {...props.backButton}
@@ -45,7 +45,7 @@ export function TopNavigation(props: Props) {
       </View>
       <View style={styles.sideContainer}>
         {props.rightButtons?.map((p, i) => (
-          <Button barItem key={i} {...p} />
+          <Button type="barItem" key={i} {...p} />
         ))}
         {props.right}
       </View>

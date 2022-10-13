@@ -10,7 +10,7 @@ export const colors = {
   /** #757575 */ foregroundL3: '#757575',
   /** #804191 */ primary: '#804191',
   /** #5F0B76 */ primaryD1: '#5F0B76',
-  /** #804191 */ secondary: '#804191',
+  /** #804191 */ secondary: '#B583C7',
   /** #FF0000 */ danger: '#E4100E',
   /** #000000 */ warning: '#000000',
   /** #000000 */ info: '#000000',

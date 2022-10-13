@@ -14,7 +14,6 @@ interface ListItemProps extends ViewProps {
 export function ListItem(props: ListItemProps) {
   const {
     style,
-    styles,
     title,
     onPress,
     rounded,
@@ -22,7 +21,8 @@ export function ListItem(props: ListItemProps) {
     isLast,
     type = 'default',
     children,
-  } = useThemeStyle('ListItem', props);
+  } = props;
+  const styles = useThemeStyle('ListItem');
 
   function getStyle(key: string, ...rest: any[]) {
     const s = styles as any;
