@@ -1,6 +1,12 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "expo-module-scripts/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "outDir": "./build",
+    "inlineSources": false,
+    "jsx": "react-native",
+    "sourceMap": false,
+    "declarationMap": false
+  },
+  "include": ["./src"],
+  "exclude": ["**/__mocks__/*", "**/__tests__/*"]
 }
