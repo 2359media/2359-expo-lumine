@@ -9,7 +9,8 @@ export interface Store<T extends object> {
   subscribe(l: () => void): () => void;
   update(newState: NewState<T>): Promise<T>;
   reset(): Promise<T>;
-  use<S>(fn?: (s: T) => S): S extends unknown ? T : S;
+  use(): T;
+  use<S>(fn: (s: T) => S): S;
 }
 
 interface StoreProps<T> {
@@ -107,7 +108,9 @@ export function createStore<T extends object>(p: StoreProps<T> = {}): Store<T> {
       handlePersistorState();
     });
   }
-  loadPromises.push(load());
+  if (p.key) {
+    loadPromises.push(load());
+  }
 
   return {
     get,
